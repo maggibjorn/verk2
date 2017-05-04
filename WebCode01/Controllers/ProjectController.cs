@@ -21,10 +21,20 @@ namespace WebCode01.Controllers
             return View(modelList);
         }
 
+        // Filter the user project list by member projects and user projects
         public ActionResult FilterProjects(bool isAuthor)
         {
             string id = User.Identity.GetUserId(); // Get current user id
             List<ProjectListViewModel> model = service.FilterProjects(id, isAuthor);
+            IEnumerable<ProjectListViewModel> modelList = model;
+            return View("Index", modelList);
+        }
+
+        // Filter the user projects by type of projects, java, c++, etc
+        public ActionResult ProjectsByType(string type)
+        {
+            string id = User.Identity.GetUserId(); // Get current user id
+            List<ProjectListViewModel> model = service.GetUserProjectsByType(id, type);
             IEnumerable<ProjectListViewModel> modelList = model;
             return View("Index", modelList);
         }

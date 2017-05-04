@@ -51,5 +51,14 @@ namespace WebCode01.Services
             list = authorProjects;
             return list;
         }
+
+        public List<ProjectListViewModel> GetUserProjectsByType(string id, string type)
+        {
+            var userProjectsList = getUserProjectList(id); // Get user projects list
+            var projectListByType = (from p in userProjectsList
+                                     where p.type == type
+                                     select p).ToList();
+            return projectListByType;
+        }
     }
 }

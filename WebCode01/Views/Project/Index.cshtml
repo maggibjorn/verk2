@@ -8,9 +8,21 @@
 
 
 <div class="btn-group">
-    @Html.ActionLink("Author Projects", "FilterProjects", new { isAuthor = true }, new { @class = "btn-class2 btn btn-default btn-sm" })
-    @Html.ActionLink("Member Projects", "FilterProjects", new { isAuthor = false }, new { @class = "btn-class2 btn btn-default btn-sm" })
-    @Html.ActionLink("My Projects", "Index", "Project", new { @class = "btn-class2 btn btn-default btn-sm" })
+    @Html.ActionLink("Author Projects", "FilterProjects", new { isAuthor = true }, new { @class = "btn-class2 btn btn-default" })
+    @Html.ActionLink("Member Projects", "FilterProjects", new { isAuthor = false }, new { @class = "btn-class2 btn btn-default" })
+    @Html.ActionLink("My Projects", "Index", "Project", new { @class = "btn-class2 btn btn-default" })
+    <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            Project type <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            <li>@Html.ActionLink("C#", "ProjectsByType", new { type = "C#" })</li>
+            <li>@Html.ActionLink("C++", "ProjectsByType", new { type = "C++" })</li>
+            <li>@Html.ActionLink("Java", "ProjectsByType", new { type = "Java" })</li>
+            <li>@Html.ActionLink("HTML", "ProjectsByType", new { type = "HTML" })</li>
+            <li>@Html.ActionLink("CSS", "ProjectsByType", new { type = "CSS" })</li>
+        </ul>
+    </div>
 </div>
 
 <div class="container">
