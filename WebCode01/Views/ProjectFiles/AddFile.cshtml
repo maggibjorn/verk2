@@ -1,0 +1,11 @@
+﻿@model WebCode01.ViewModels.ProjectFileViewModel
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div>
+        @Html.TextBoxFor(x => x.fileName)
+        @Html.TextBoxFor(x => x.file,  new {type ="file"})  
+             
+    </div>
+
+    <button type="submit">Upload</button>
+}

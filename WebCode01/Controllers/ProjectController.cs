@@ -38,5 +38,6 @@ namespace WebCode01.Controllers
             IEnumerable<ProjectListViewModel> modelList = model;
             return View("Index", modelList);
         }
+
     }
 }

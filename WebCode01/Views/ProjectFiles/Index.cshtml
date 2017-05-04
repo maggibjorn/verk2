@@ -1,0 +1,12 @@
+﻿@model IEnumerable<WebCode01.ViewModels.ProjectFileViewModel>
+@{
+    ViewBag.Title = "Project Files";
+}
+
+<h2>Project Files</h2>
+
+<div class="container">
+    <div class="row">
+        @Html.ActionLink("Upload File", "AddFile", "ProjectFiles", new { @class="btn btn-default"})
+    </div>
+</div>
