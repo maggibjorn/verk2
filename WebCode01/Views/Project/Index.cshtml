@@ -1,0 +1,30 @@
+﻿@model IEnumerable<WebCode01.ViewModels.ProjectListViewModel>
+
+@{
+    ViewBag.Title = "My Projects";
+}
+
+<h2>Your Projects</h2>
+
+@Html.ActionLink("Author Projects", "FilterProjects", new { isAuthor = true }, new { @class = "btn-class2 btn btn-default btn-sm" })
+@Html.ActionLink("Member Projects", "FilterProjects", new { isAuthor = false }, new { @class = "btn-class2 btn btn-default btn-sm" })
+@Html.ActionLink("My Projects", "Index", "Project", new { @class = "btn-class2 btn btn-default btn-sm" })
+
+<div class="container">
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4">
+                <div class="well col-md-11">
+                    <h3>@item.name</h3>
+                    <h3>@item.type</h3>
+                    <h3>@item.authorName</h3>
+
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
