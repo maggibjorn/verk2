@@ -6,9 +6,12 @@
 
 <h2>Your Projects</h2>
 
-@Html.ActionLink("Author Projects", "FilterProjects", new { isAuthor = true }, new { @class = "btn-class2 btn btn-default btn-sm" })
-@Html.ActionLink("Member Projects", "FilterProjects", new { isAuthor = false }, new { @class = "btn-class2 btn btn-default btn-sm" })
-@Html.ActionLink("My Projects", "Index", "Project", new { @class = "btn-class2 btn btn-default btn-sm" })
+
+<div class="btn-group">
+    @Html.ActionLink("Author Projects", "FilterProjects", new { isAuthor = true }, new { @class = "btn-class2 btn btn-default btn-sm" })
+    @Html.ActionLink("Member Projects", "FilterProjects", new { isAuthor = false }, new { @class = "btn-class2 btn btn-default btn-sm" })
+    @Html.ActionLink("My Projects", "Index", "Project", new { @class = "btn-class2 btn btn-default btn-sm" })
+</div>
 
 <div class="container">
     <div class="row">
