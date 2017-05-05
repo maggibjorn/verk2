@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebCode01.ViewModels
 {
@@ -10,5 +11,12 @@ namespace WebCode01.ViewModels
         public string name { get; set; }
         public string type { get; set; }
         public string authorName { get; set; }
+    }
+    public class CreateProjectViewModel
+    {
+        [Required]
+        public string name { get; set; }
+        [Required]
+        public int type { get; set; }
     }
 }

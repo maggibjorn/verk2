@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using WebCode01.Models;
 using WebCode01.ViewModels;
+using WebCode01.Entities;
 
 namespace WebCode01.Services
 {
@@ -59,6 +60,25 @@ namespace WebCode01.Services
                                      where p.type == type
                                      select p).ToList();
             return projectListByType;
+        }
+        public void AddProjectToDb(CreateProjectViewModel model, string id)
+        {
+            Project UsersProject = new Project
+            {
+                name = model.name,
+                projectTypeId = model.type
+            };
+            db.projects.Add(UsersProject);
+            db.SaveChanges();
+            Member newConnection = new Member
+            {
+                projectId = UsersProject.id,
+                userId = id,
+                isAuthor = true
+            };
+            db.members.Add(newConnection);
+            db.SaveChanges();
+
         }
     }
 }

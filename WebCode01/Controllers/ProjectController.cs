@@ -38,6 +38,24 @@ namespace WebCode01.Controllers
             IEnumerable<ProjectListViewModel> modelList = model;
             return View("Index", modelList);
         }
+        public ActionResult CreateProject()
+        {
+            var model = new CreateProjectViewModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult CreateProject(CreateProjectViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            string id = User.Identity.GetUserId(); // Get current user id
+            service.AddProjectToDb(model,id);
+
+            return RedirectToAction("Index");
+        }
 
     }
 }

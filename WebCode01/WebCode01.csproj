@@ -297,6 +297,7 @@
     <Content Include="Views\Project\Index.cshtml" />
     <Content Include="Views\ProjectFiles\Index.cshtml" />
     <Content Include="Views\ProjectFiles\AddFile.cshtml" />
+    <Content Include="Views\Project\CreateProject.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
