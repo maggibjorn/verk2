@@ -10,7 +10,6 @@ namespace WebCode01.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            //ContextKey = "WebCode01.Models.ApplicationDbContext";
         }
 
         protected override void Seed(WebCode01.Models.ApplicationDbContext context)

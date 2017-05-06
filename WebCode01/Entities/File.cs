@@ -9,7 +9,7 @@ namespace WebCode01.Entities
     {
         public int id { get; set; }
         public string name { get; set; }
-        public byte[] fileBinary {get; set;}
+        public string fileContent {get; set;}
         public int projectId { get; set; }
     }
 }

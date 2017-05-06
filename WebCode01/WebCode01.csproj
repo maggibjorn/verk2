@@ -207,25 +207,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201705031208199_init.cs" />
-    <Compile Include="Migrations\201705031208199_init.Designer.cs">
-      <DependentUpon>201705031208199_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705031220458_mig1.cs" />
-    <Compile Include="Migrations\201705031220458_mig1.Designer.cs">
-      <DependentUpon>201705031220458_mig1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705031626496_AddProjectType.cs" />
-    <Compile Include="Migrations\201705031626496_AddProjectType.Designer.cs">
-      <DependentUpon>201705031626496_AddProjectType.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705031921282_AddisAuthor.cs" />
-    <Compile Include="Migrations\201705031921282_AddisAuthor.Designer.cs">
-      <DependentUpon>201705031921282_AddisAuthor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705041853462_addFile.cs" />
-    <Compile Include="Migrations\201705041853462_addFile.Designer.cs">
-      <DependentUpon>201705041853462_addFile.cs</DependentUpon>
+    <Compile Include="Migrations\201705061425507_init.cs" />
+    <Compile Include="Migrations\201705061425507_init.Designer.cs">
+      <DependentUpon>201705061425507_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -311,20 +295,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705031208199_init.resx">
-      <DependentUpon>201705031208199_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705031220458_mig1.resx">
-      <DependentUpon>201705031220458_mig1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705031626496_AddProjectType.resx">
-      <DependentUpon>201705031626496_AddProjectType.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705031921282_AddisAuthor.resx">
-      <DependentUpon>201705031921282_AddisAuthor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705041853462_addFile.resx">
-      <DependentUpon>201705041853462_addFile.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705061425507_init.resx">
+      <DependentUpon>201705061425507_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

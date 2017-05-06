@@ -24,7 +24,7 @@ namespace WebCode01.Controllers
             return View(model);
         }
 
-        [HttpPost]
+        /*[HttpPost]
         public ActionResult Addfile(ProjectFileViewModel model)
         {
             if (!ModelState.IsValid)
@@ -36,7 +36,7 @@ namespace WebCode01.Controllers
             
 
             return RedirectToAction("Index");
-        }
+        }*/
 
        
 

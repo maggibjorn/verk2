@@ -16,7 +16,7 @@ namespace WebCode01.Services
             db = new ApplicationDbContext();
         }
 
-        public void addFileToDb(ProjectFileViewModel model)
+        /*public void addFileToDb(ProjectFileViewModel model)
         {
             byte[] uploadedFile = new byte[model.file.InputStream.Length];
             model.file.InputStream.Read(uploadedFile, 0, uploadedFile.Length);
@@ -29,6 +29,6 @@ namespace WebCode01.Services
             db.files.Add(newFile);
             db.SaveChanges();
 
-        }
+        }*/
     }
 }
