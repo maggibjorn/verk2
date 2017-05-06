@@ -64,8 +64,8 @@ namespace WebCode01.Models
 
     public class RegisterViewModel
     {
-        [Required]
-        [Display(Name = "Username")]
+        //[Required]
+        //[Display(Name = "Username")]
         public string userName { get; set; }
 
         [Required]

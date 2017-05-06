@@ -8,6 +8,7 @@ namespace WebCode01.ViewModels
 {
     public class ProjectListViewModel
     {
+        public int id { get; set; }
         public string name { get; set; }
         public string type { get; set; }
         public string authorName { get; set; }

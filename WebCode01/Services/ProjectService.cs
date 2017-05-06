@@ -25,6 +25,7 @@ namespace WebCode01.Services
                                 where u.Id == id 
                                 select new ProjectListViewModel
                                 {
+                                    id = p.id,
                                     name = p.name,
                                     type = t.name
                                     

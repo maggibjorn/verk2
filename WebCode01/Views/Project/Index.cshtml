@@ -38,7 +38,7 @@
             <div class="col-md-4">
                 <div class="well col-md-11">
                     
-                    <h3>@Html.ActionLink(item.name, "Index", "ProjectFiles")</h3>
+                    <h3>@Html.ActionLink(item.name, "Index", "ProjectFiles", new { projectId = item.id}, null)</h3>
                     <h3>@item.type</h3>
                     <h3>@item.authorName</h3>
 

@@ -16,6 +16,21 @@ namespace WebCode01.Services
             db = new ApplicationDbContext();
         }
 
+        public List<ProjectFileListViewModel> getProjectFilesById(int projectId)
+        {
+            var files = (from f in db.files
+                         join p in db.projects on f.projectId equals p.id
+                         where p.id == projectId
+                         select new ProjectFileListViewModel
+                         {
+                             fileName = f.name,
+
+                         }).ToList();
+            return files;
+        }
+
+        //public List<ProjectFileViewModel>
+
         /*public void addFileToDb(ProjectFileViewModel model)
         {
             byte[] uploadedFile = new byte[model.file.InputStream.Length];

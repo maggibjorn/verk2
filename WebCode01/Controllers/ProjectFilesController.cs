@@ -12,9 +12,16 @@ namespace WebCode01.Controllers
     {
         public ProjectFilesService service = new ProjectFilesService();
         // GET: ProjectFiles
-        public ActionResult Index()
+        public ActionResult Index(int projectId)
         {
-            // TODO: Birta lista af skrám í verkefni
+            // Birta lista af skrám í verkefni
+            List<ProjectFileListViewModel> model = service.getProjectFilesById(projectId);
+            IEnumerable<ProjectFileListViewModel> modelList = model;
+            return View(modelList);
+        }
+
+        public ActionResult Editor()
+        {
             return View();
         }
 

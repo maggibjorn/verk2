@@ -1,9 +1,38 @@
-﻿@model IEnumerable<WebCode01.ViewModels.ProjectFileViewModel>
+﻿@model IEnumerable<WebCode01.ViewModels.ProjectFileListViewModel>
 @{
     ViewBag.Title = "Project Files";
 }
 
 <h2>Project Files</h2>
+
+<div class="container">
+    <div class="row">
+        <div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>File Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.ActionLink(item.fileName, "Editor", "ProjectFiles")</td>
+                        </tr>
+                    }
+
+
+
+                </tbody>
+
+
+            </table>
+
+        </div>
+         
+    </div>
+</div>
 
 <div class="container">
     <div class="row">
