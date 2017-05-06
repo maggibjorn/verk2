@@ -15,8 +15,10 @@ namespace WebCode01.ViewModels
     public class CreateProjectViewModel
     {
         [Required]
+        [Display(Name = "Project Name")]
         public string name { get; set; }
         [Required]
+        [Display(Name = "Project Type")]
         public int type { get; set; }
     }
 }
