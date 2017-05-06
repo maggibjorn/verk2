@@ -20,9 +20,10 @@ namespace WebCode01.Controllers
             return View(modelList);
         }
 
-        public ActionResult Editor()
+        public ActionResult Editor(int fileId)
         {
-            return View();
+            ProjectFileViewModel model = service.getFileById(fileId);
+            return View(model);
         }
 
         public ActionResult AddFile()

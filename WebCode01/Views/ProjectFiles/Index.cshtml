@@ -18,19 +18,12 @@
                     @foreach(var item in Model)
                     {
                         <tr>
-                            <td>@Html.ActionLink(item.fileName, "Editor", "ProjectFiles")</td>
+                            <td>@Html.ActionLink(item.fileName, "Editor", new { fileId = item.id})</td>
                         </tr>
                     }
-
-
-
                 </tbody>
-
-
             </table>
-
-        </div>
-         
+        </div>         
     </div>
 </div>
 

@@ -8,7 +8,6 @@ namespace WebCode01.ViewModels
     public class ProjectFileViewModel
     {
         public string fileName { get; set; }
-        public string file { get; set; }
-        
+        public string fileContent { get; set; }
     }
 }

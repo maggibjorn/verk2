@@ -5,3 +5,25 @@
 
 <h2>Editor</h2>
 
+
+<div class="row">
+    <div id="editor" class="col-md-10"></div>
+</div>
+<script src="@Url.Content("https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ace.js")"></script>
+<script>
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.getSession().setMode("ace/mode/javascript");
+        editor.getSession().setMode("ace/mode/html");
+        var content = "@Html.Raw(Model.fileContent)";
+        editor.setValue(content);
+
+</script>
+
+<style type="text/css" media="screen">
+    #editor {
+        position: relative;
+        height: 800px;
+    }
+</style>
+

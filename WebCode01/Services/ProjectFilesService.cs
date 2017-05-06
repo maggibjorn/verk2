@@ -23,10 +23,25 @@ namespace WebCode01.Services
                          where p.id == projectId
                          select new ProjectFileListViewModel
                          {
+                             id = f.id,
                              fileName = f.name,
 
                          }).ToList();
             return files;
+        }
+        
+        public ProjectFileViewModel getFileById(int fileId)
+        {
+            var fileDetails = (from f in db.files
+                              where f.id == fileId
+                              select new ProjectFileViewModel
+                              {
+                                  fileName = f.name,
+                                  fileContent = f.fileContent
+                              }).FirstOrDefault();
+
+            return fileDetails;
+
         }
 
         //public List<ProjectFileViewModel>
