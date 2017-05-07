@@ -286,6 +286,7 @@
     <Content Include="Views\ProjectFiles\Editor.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="AceEditor\src\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>

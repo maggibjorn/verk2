@@ -36,7 +36,7 @@ namespace WebCode01.Services
                               where f.id == fileId
                               select new ProjectFileViewModel
                               {
-                                  fileName = f.name,
+                                  id = f.id,
                                   fileContent = f.fileContent
                               }).FirstOrDefault();
 
@@ -44,21 +44,18 @@ namespace WebCode01.Services
 
         }
 
-        //public List<ProjectFileViewModel>
-
-        /*public void addFileToDb(ProjectFileViewModel model)
+        public void saveCodeToDb(ProjectFileViewModel model)
         {
-            byte[] uploadedFile = new byte[model.file.InputStream.Length];
-            model.file.InputStream.Read(uploadedFile, 0, uploadedFile.Length);
-            File newFile = new File
-            {
-                name = model.fileName,
-                fileBinary = uploadedFile,
-                projectId = 1
-            };
-            db.files.Add(newFile);
+            var file = (from f in db.files
+                        where f.id == model.id
+                        select f).FirstOrDefault();
+            file.fileContent = model.fileContent;
             db.SaveChanges();
 
-        }*/
+        }
+
+        
+
+        
     }
 }

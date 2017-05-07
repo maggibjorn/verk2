@@ -23,7 +23,16 @@ namespace WebCode01.Controllers
         public ActionResult Editor(int fileId)
         {
             ProjectFileViewModel model = service.getFileById(fileId);
-            return View(model);
+            ViewBag.Code = model.fileContent;
+            ViewBag.id = fileId;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SaveCode(ProjectFileViewModel model)
+        {
+            service.saveCodeToDb(model);
+            return View("Editor", model);
         }
 
         public ActionResult AddFile()
@@ -32,19 +41,7 @@ namespace WebCode01.Controllers
             return View(model);
         }
 
-        /*[HttpPost]
-        public ActionResult Addfile(ProjectFileViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            service.addFileToDb(model);
-            
-
-            return RedirectToAction("Index");
-        }*/
+        
 
        
 

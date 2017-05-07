@@ -7,23 +7,45 @@
 
 
 <div class="row">
-    <div id="editor" class="col-md-10"></div>
+    <div id="editor" class="col-md-10">
+        @ViewBag.Code
+    </div>
 </div>
-<script src="@Url.Content("https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ace.js")"></script>
-<script>
-        var editor = ace.edit("editor");
-        editor.setTheme("ace/theme/monokai");
-        editor.getSession().setMode("ace/mode/javascript");
-        editor.getSession().setMode("ace/mode/html");
-        var content = "@Html.Raw(Model.fileContent)";
-        editor.setValue(content);
 
-</script>
+@using (Html.BeginForm("SaveCode", "ProjectFiles", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.id,  new { @id = "hidden-id" })
+    @Html.HiddenFor(m => m.fileContent, new { @id = "hidden-editor" })
+    <input type="submit" value="Save Code" />
+}
 
-<style type="text/css" media="screen">
-    #editor {
-        position: relative;
-        height: 800px;
-    }
-</style>
+
+@section scripts
+{
+    <script src="~/AceEditor/src/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+            var editor = ace.edit("editor");
+            editor.setTheme("ace/theme/monokai");
+            editor.getSession().setMode("ace/mode/javascript");
+            var id = '@Html.Raw(@ViewBag.id)';
+            $("form").submit(function () {
+                $("#hidden-id").val(id);
+                $("#hidden-editor").val(editor.getSession().getValue());
+            });
+    </script>
+
+}
+
+
+
+
+
+
+
+
+
+
+    
+ 
+
 
