@@ -30,16 +30,16 @@ namespace WebCode01.Services
                          }).ToList();
             return files;
         }
-        
+
         public ProjectFileViewModel getFileById(int fileId)
         {
             var fileDetails = (from f in db.files
-                              where f.id == fileId
-                              select new ProjectFileViewModel
-                              {
-                                  id = f.id,
-                                  fileContent = f.fileContent
-                              }).FirstOrDefault();
+                               where f.id == fileId
+                               select new ProjectFileViewModel
+                               {
+                                   id = f.id,
+                                   fileContent = f.fileContent
+                               }).FirstOrDefault();
 
             return fileDetails;
 
@@ -54,11 +54,19 @@ namespace WebCode01.Services
             db.SaveChanges();
 
         }
+        public void AddMember(AddMemberViewModel model)
+        {
+            var userId = (from u in db.Users
+                       where model.userEmail == u.Email
+                       select u.Id).FirstOrDefault();
+            Member newMember = new Member()
+            {
+                projectId = model.projectId,
+                userId = userId
+            };
+            db.members.Add(newMember);
+            db.SaveChanges();
+        }
 
-       
-
-        
-
-        
     }
 }

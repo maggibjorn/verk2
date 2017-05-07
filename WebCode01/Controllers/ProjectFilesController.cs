@@ -47,7 +47,11 @@ namespace WebCode01.Controllers
         [HttpPost]
         public ActionResult AddMember(AddMemberViewModel model)
         {
-           // ToDo Add to database :
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            service.AddMember(model);
 
             return RedirectToAction("Index", new { projectId = model.projectId });
         }
