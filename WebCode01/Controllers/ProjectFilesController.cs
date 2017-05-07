@@ -14,8 +14,11 @@ namespace WebCode01.Controllers
         // GET: ProjectFiles
         public ActionResult Index(int projectId)
         {
-            // Birta lista af skrám í verkefni
             List<ProjectFileListViewModel> model = service.getProjectFilesById(projectId);
+            if (model.Count > 0)
+            {
+                ViewBag.projectId = model[0].projectId; // Fetch project id
+            }
             IEnumerable<ProjectFileListViewModel> modelList = model;
             return View(modelList);
         }
@@ -35,11 +38,27 @@ namespace WebCode01.Controllers
             return RedirectToAction("Editor", new { fileId = model.id});
         }
 
-        public ActionResult AddFile()
+        public ActionResult AddMember(int projectId)
         {
-            var model = new ProjectFileViewModel();
-            return View(model);
+            ViewBag.projectId = projectId;
+            return View();
         }
+        
+        [HttpPost]
+        public ActionResult AddMember(AddMemberViewModel model)
+        {
+           // ToDo Add to database :
+
+            return RedirectToAction("Index", new { projectId = model.projectId });
+        }
+
+
+
+
+
+
+
+        
 
         
 

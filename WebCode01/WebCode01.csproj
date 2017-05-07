@@ -219,6 +219,7 @@
     <Compile Include="Services\ProjectFilesService.cs" />
     <Compile Include="Services\ProjectService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AddMemberViewModel.cs" />
     <Compile Include="ViewModels\ProjectFileListViewModel.cs" />
     <Compile Include="ViewModels\ProjectFileViewModel.cs" />
     <Compile Include="ViewModels\ProjectListViewModel.cs" />
@@ -284,6 +285,7 @@
     <Content Include="Views\ProjectFiles\AddFile.cshtml" />
     <Content Include="Views\Project\CreateProject.cshtml" />
     <Content Include="Views\ProjectFiles\Editor.cshtml" />
+    <Content Include="Views\ProjectFiles\AddMember.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AceEditor\src\" />

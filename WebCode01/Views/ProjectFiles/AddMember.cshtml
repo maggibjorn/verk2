@@ -1,0 +1,24 @@
+﻿@model WebCode01.ViewModels.AddMemberViewModel
+@{
+    ViewBag.Title = "AddMember";
+}
+
+<h2>AddMember</h2>
+
+@Html.BeginForm("AddMember", "ProjectFiles", FormMethod.Post)
+{
+    @Html.TextBoxFor(m => m.userEmail)
+    @Html.HiddenFor(m => m.projectId, new { @id = "hidden-projectId" })
+    <input type="submit" value="Add Member" class="btn-btn-default"/>
+}
+
+@section scripts
+{
+    <script>
+        var id = '@Html.Raw(@ViewBag.projectId)';
+        $("form").submit(function () {
+            $("#hidden-projectId").val(id);
+        });
+
+    </script>
+}

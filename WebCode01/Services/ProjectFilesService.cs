@@ -25,6 +25,7 @@ namespace WebCode01.Services
                          {
                              id = f.id,
                              fileName = f.name,
+                             projectId = p.id
 
                          }).ToList();
             return files;

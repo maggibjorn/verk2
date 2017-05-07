@@ -9,5 +9,6 @@ namespace WebCode01.ViewModels
     {
         public int id { get; set; }
         public string fileName { get; set; }
+        public int projectId { get; set; }
     }
 }
