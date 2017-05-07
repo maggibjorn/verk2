@@ -32,7 +32,7 @@ namespace WebCode01.Controllers
         public ActionResult SaveCode(ProjectFileViewModel model)
         {
             service.saveCodeToDb(model);
-            return View("Editor", model);
+            return RedirectToAction("Editor", new { fileId = model.id});
         }
 
         public ActionResult AddFile()
