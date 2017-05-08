@@ -10,4 +10,9 @@ namespace WebCode01.ViewModels
         public int id { get; set; }
         public string fileContent { get; set; }
     }
+    public class AddFileViewModel
+    {
+        public int projectId { get; set; }
+        public HttpPostedFileBase file { get; set; }
+    }
 }

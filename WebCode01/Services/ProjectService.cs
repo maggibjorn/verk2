@@ -79,7 +79,14 @@ namespace WebCode01.Services
             };
             db.members.Add(newConnection);
             db.SaveChanges();
-
+            File firstFile = new File
+            {
+                name = "Index.txt",
+                fileContent = " ",
+                projectId = UsersProject.id
+            };
+            db.files.Add(firstFile);
+            db.SaveChanges();
         }
     }
 }

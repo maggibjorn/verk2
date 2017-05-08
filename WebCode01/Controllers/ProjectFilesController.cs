@@ -55,19 +55,23 @@ namespace WebCode01.Controllers
 
             return RedirectToAction("Index", new { projectId = model.projectId });
         }
+       /* public ActionResult AddFile(int projectId)
+        {
+            ViewBag.projectId = projectId;
+            return View();
+        }*/
+        public ActionResult AddFile(int projectId)
+        {
+            ViewBag.projectId = projectId;
+            return View();
+        }
 
-
-
-
-
-
-
-        
-
-        
-
-       
-
+        [HttpPost]
+        public ActionResult AddFile(AddFileViewModel model)
+        {
+            service.saveFileToDb(model);
+            return RedirectToAction("Index", new { projectId = model.projectId });
+        }
 
     }
 }

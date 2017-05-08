@@ -28,10 +28,8 @@
 </div>
 
 <div class="container">
-    <div class="row">
-        @Html.ActionLink("Upload File", "AddFile", "ProjectFiles", new { @class="btn btn-default"})
-    </div>
-    <div class="row">
-        @Html.ActionLink("Add Member", "AddMember", new { projectId = @ViewBag.projectId}, new { @class = "btn btn-default" })
-    </div>
+    <span class="row">
+        @Html.ActionLink("Upload File", "AddFile", "ProjectFiles", new { projectId = @ViewBag.projectId }, new { @class="btn btn-default"})
+        @Html.ActionLink("Add Member", "AddMember", new { projectId = @ViewBag.projectId }, new { @class = "btn btn-default" })
+    </span>
 </div>

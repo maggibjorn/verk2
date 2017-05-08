@@ -5,11 +5,12 @@
 
 <h2>AddMember</h2>
 
-@Html.BeginForm("AddMember", "ProjectFiles", FormMethod.Post)
+@using (Html.BeginForm("AddMember", "ProjectFiles", FormMethod.Post))
 {
-    @Html.TextBoxFor(m => m.userEmail)
-    @Html.HiddenFor(m => m.projectId, new { @id = "hidden-projectId" })
-    <input type="submit" value="Add Member" class="btn-btn-default"/>
+        @Html.LabelFor(m => m.userEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.TextBoxFor(m => m.userEmail)
+        @Html.HiddenFor(m => m.projectId, new { @id = "hidden-projectId" })
+        <input type="submit" value="Add Member" class="btn-btn-default" />
 }
 
 @section scripts

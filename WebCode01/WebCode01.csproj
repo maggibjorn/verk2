@@ -283,10 +283,10 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Project\Index.cshtml" />
     <Content Include="Views\ProjectFiles\Index.cshtml" />
-    <Content Include="Views\ProjectFiles\AddFile.cshtml" />
     <Content Include="Views\Project\CreateProject.cshtml" />
     <Content Include="Views\ProjectFiles\Editor.cshtml" />
     <Content Include="Views\ProjectFiles\AddMember.cshtml" />
+    <Content Include="Views\ProjectFiles\AddFile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AceEditor\src\" />
@@ -319,7 +319,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50132</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

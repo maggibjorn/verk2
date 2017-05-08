@@ -54,6 +54,27 @@ namespace WebCode01.Services
             db.SaveChanges();
 
         }
+        public void saveFileToDb(AddFileViewModel model)
+        {   
+            List<string> file = new List<string>();
+            using (System.IO.StreamReader reader = new System.IO.StreamReader(model.file.InputStream))
+            {
+                while (!reader.EndOfStream)
+                {
+                    file.Add(reader.ReadLine());
+                }
+            }
+            string content = string.Join(Environment.NewLine, file.ToArray());
+            File newFile = new File
+            {
+                name = model.file.FileName,
+                projectId = model.projectId,
+                fileContent = content
+            };
+            db.files.Add(newFile);
+            db.SaveChanges();
+
+        }
         public void AddMember(AddMemberViewModel model)
         {
             var userId = (from u in db.Users

@@ -1,9 +1,20 @@
-﻿@model WebCode01.ViewModels.ProjectFileViewModel
+﻿@model WebCode01.ViewModels.AddFileViewModel
 @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div>
-        @Html.TextBoxFor(x => x.fileContent,  new {type ="file"})              
+        @Html.HiddenFor(x => x.projectId, new { @id = "hidden-projectId" })
+        @Html.TextBoxFor(x => x.file, new { type = "file" })
     </div>
 
-    <button type="submit">Upload</button>
+    <button type="submit" value="Add File">Upload</button>
 }
+@section scripts
+{
+    <script>
+        var id = '@Html.Raw(@ViewBag.projectId)';
+        $("form").submit(function () {
+            $("#hidden-projectId").val(id);
+        });
+    </script>
+}
+
