@@ -9,6 +9,7 @@ namespace WebCode01.Entities
     {
         public int id { get; set; }
         public string name { get; set; }
-        public int projectTypeId { get; set; }
+        public int numMembers { get; set; }
+        
     }
 }

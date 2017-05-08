@@ -15,6 +15,7 @@ namespace WebCode01.Migrations
                         name = c.String(),
                         fileContent = c.String(),
                         projectId = c.Int(nullable: false),
+                        fileTypeId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.id);
             
@@ -35,7 +36,6 @@ namespace WebCode01.Migrations
                     {
                         id = c.Int(nullable: false, identity: true),
                         name = c.String(),
-                        projectTypeId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.id);
             
@@ -63,7 +63,7 @@ namespace WebCode01.Migrations
                 .Index(t => t.RoleId);
             
             CreateTable(
-                "dbo.ProjectTypes",
+                "dbo.FileTypes",
                 c => new
                     {
                         id = c.Int(nullable: false, identity: true),
@@ -133,7 +133,7 @@ namespace WebCode01.Migrations
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
-            DropTable("dbo.ProjectTypes");
+            DropTable("dbo.FileTypes");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Projects");

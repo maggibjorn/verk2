@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WebCode01.Entities
 {
-    public class ProjectType
+    public class FileType
     {
         public int id { get; set; }
         public string name { get; set; }

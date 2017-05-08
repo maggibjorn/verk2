@@ -18,7 +18,7 @@ namespace WebCode01.Services
         
         public List<ProjectListViewModel> getUserProjectList(string id)
         {
-            var userProjects = (from p in db.projects
+            /*var userProjects = (from p in db.projects
                                 join m in db.members on p.id equals m.projectId
                                 join u in db.Users on m.userId equals u.Id
                                 join t in db.types on p.projectTypeId equals t.id
@@ -32,13 +32,13 @@ namespace WebCode01.Services
                                 }).ToList();
                        
             List<ProjectListViewModel> list = new List<ProjectListViewModel>();
-            list = userProjects;
-            return list;
+            list = userProjects;*/
+            return null;
         }
 
         public List<ProjectListViewModel> FilterProjects(string id, bool isAuthor)
         {
-            var authorProjects = (from p in db.projects
+            /*var authorProjects = (from p in db.projects
                                 join m in db.members on p.id equals m.projectId
                                 join u in db.Users on m.userId equals u.Id
                                 join t in db.types on p.projectTypeId equals t.id
@@ -48,10 +48,10 @@ namespace WebCode01.Services
                                     name = p.name,
                                     type = t.name
 
-                                }).ToList();
+                                }).ToList();*/
             List<ProjectListViewModel> list = new List<ProjectListViewModel>();
-            list = authorProjects;
-            return list;
+            //list = authorProjects;
+            return null;
         }
 
         public List<ProjectListViewModel> GetUserProjectsByType(string id, string type)
@@ -67,7 +67,7 @@ namespace WebCode01.Services
             Project UsersProject = new Project
             {
                 name = model.name,
-                projectTypeId = model.type
+                //projectTypeId = model.type
             };
             db.projects.Add(UsersProject);
             db.SaveChanges();

@@ -11,5 +11,6 @@ namespace WebCode01.Entities
         public string name { get; set; }
         public string fileContent {get; set;}
         public int projectId { get; set; }
+        public int fileTypeId { get; set; }
     }
 }
