@@ -23,6 +23,15 @@ namespace WebCode01.Controllers
             return View(modelList);
         }
 
+        // Filter the user projects by type of projects, java, c++, etc
+        public ActionResult FilesByType(int projectId, string fileType)
+        {
+            List<ProjectFileListViewModel> model = service.GetFilesByType(projectId, fileType);
+            IEnumerable<ProjectFileListViewModel> modelList = model;
+            return View("Index", modelList);
+        }
+        
+
         public ActionResult Editor(int fileId)
         {
             ProjectFileViewModel model = service.getFileById(fileId);

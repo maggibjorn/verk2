@@ -18,62 +18,49 @@ namespace WebCode01.Services
         
         public List<ProjectListViewModel> getUserProjectList(string id)
         {
-            /*var userProjects = (from p in db.projects
+            
+            var userProjects = (from p in db.projects
                                 join m in db.members on p.id equals m.projectId
                                 join u in db.Users on m.userId equals u.Id
-                                join t in db.types on p.projectTypeId equals t.id
                                 where u.Id == id 
                                 select new ProjectListViewModel
                                 {
                                     id = p.id,
                                     name = p.name,
-                                    type = t.name
+                                    
                                     
                                 }).ToList();
-                       
-            List<ProjectListViewModel> list = new List<ProjectListViewModel>();
-            list = userProjects;*/
-            return null;
+                     
+            return userProjects;
         }
 
         public List<ProjectListViewModel> FilterProjects(string id, bool isAuthor)
         {
-            /*var authorProjects = (from p in db.projects
+            var filter = (from p in db.projects
                                 join m in db.members on p.id equals m.projectId
-                                join u in db.Users on m.userId equals u.Id
-                                join t in db.types on p.projectTypeId equals t.id
+                                join u in db.Users on m.userId equals u.Id                               
                                 where u.Id == id && m.isAuthor == isAuthor
                                 select new ProjectListViewModel
                                 {
-                                    name = p.name,
-                                    type = t.name
+                                    name = p.name,                                    
 
-                                }).ToList();*/
-            List<ProjectListViewModel> list = new List<ProjectListViewModel>();
-            //list = authorProjects;
-            return null;
+                                }).ToList();
+            
+            return filter;
         }
 
-        public List<ProjectListViewModel> GetUserProjectsByType(string id, string type)
-        {
-            var userProjectsList = getUserProjectList(id); // Get user projects list
-            var projectListByType = (from p in userProjectsList
-                                     where p.type == type
-                                     select p).ToList();
-            return projectListByType;
-        }
         public void AddProjectToDb(CreateProjectViewModel model, string id)
         {
-            Project UsersProject = new Project
+            Project usersProject = new Project
             {
-                name = model.name,
+                name = model.name
                 //projectTypeId = model.type
             };
-            db.projects.Add(UsersProject);
+            db.projects.Add(usersProject);
             db.SaveChanges();
             Member newConnection = new Member
             {
-                projectId = UsersProject.id,
+                projectId = usersProject.id,
                 userId = id,
                 isAuthor = true
             };
@@ -81,9 +68,10 @@ namespace WebCode01.Services
             db.SaveChanges();
             File firstFile = new File
             {
-                name = "Index.txt",
-                fileContent = " ",
-                projectId = UsersProject.id
+                name = "index.html",
+                fileContent = "",
+                projectId = usersProject.id,
+                fileTypeId = 4 // The HTML type Id
             };
             db.files.Add(firstFile);
             db.SaveChanges();

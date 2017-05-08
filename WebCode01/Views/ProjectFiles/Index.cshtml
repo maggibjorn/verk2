@@ -5,6 +5,22 @@
 
 <h2>Project Files</h2>
 
+
+<div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+        File Type
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        <li>@Html.ActionLink("All Files", "Index", new { projectId = @ViewBag.projectId})</li>
+        <li>@Html.ActionLink("C#", "FilesByType", new { projectId = @ViewBag.projectId, fileType = "C#" })</li>
+        <li>@Html.ActionLink("C++", "FilesByType", new { projectId = @ViewBag.projectId, fileType = "C++" })</li>
+        <li>@Html.ActionLink("Javascript", "FilesByType", new { projectId = @ViewBag.projectId, fileType = "Javascript" })</li>
+        <li>@Html.ActionLink("HTML", "FilesByType", new { projectId = @ViewBag.projectId, fileType = "HTML" })</li>
+        <li>@Html.ActionLink("CSS", "FilesByType", new { projectId = @ViewBag.projectId, fileType = "CSS" })</li>
+    </ul>
+</div>
+
 <div class="container">
     <div class="row">
         <div>

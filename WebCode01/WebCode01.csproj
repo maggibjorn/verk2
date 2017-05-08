@@ -233,6 +233,7 @@
     <Compile Include="Services\ProjectService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AddMemberViewModel.cs" />
+    <Compile Include="ViewModels\CreateProjectViewModel.cs" />
     <Compile Include="ViewModels\ProjectFileListViewModel.cs" />
     <Compile Include="ViewModels\ProjectFileViewModel.cs" />
     <Compile Include="ViewModels\ProjectListViewModel.cs" />

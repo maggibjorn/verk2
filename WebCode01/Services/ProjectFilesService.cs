@@ -45,6 +45,22 @@ namespace WebCode01.Services
 
         }
 
+        public List<ProjectFileListViewModel> GetFilesByType(int projectId, string type)
+        {
+            var filesByType = (from f in db.files
+                               join p in db.projects on f.projectId equals p.id
+                               join t in db.types on f.fileTypeId equals t.id
+                               where t.name == type
+                               select new ProjectFileListViewModel
+                               {
+                                   id = f.id,
+                                   fileName = f.name,
+                                   projectId = p.id
+
+                               }).ToList();
+            return filesByType;
+        }
+
         public void saveCodeToDb(ProjectFileViewModel model)
         {
             var file = (from f in db.files
@@ -64,12 +80,40 @@ namespace WebCode01.Services
                     file.Add(reader.ReadLine());
                 }
             }
+            // Check file type
+            string fileType = model.file.FileName.Split('.')[1].ToLower();
+            int typeId;
+            if (fileType == "cs")
+            {
+                typeId = 1;
+            }
+            else if (fileType == "cpp")
+            {
+                typeId = 2;
+            }
+            else if (fileType == "js")
+            {
+                typeId = 3;
+            }
+            else if (fileType == "html")
+            {
+                typeId = 4;
+            }
+            else if (fileType == "css")
+            {
+                typeId = 5;
+            }
+            else
+            {
+                typeId = 6; // Assign file as dat file if exstension in unknown
+            }
             string content = string.Join(Environment.NewLine, file.ToArray());
             File newFile = new File
             {
                 name = model.file.FileName,
                 projectId = model.projectId,
-                fileContent = content
+                fileContent = content,
+                fileTypeId = typeId
             };
             db.files.Add(newFile);
             db.SaveChanges();

@@ -6,11 +6,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebCode01.ViewModels
 {
-    public class ProjectListViewModel
+    public class CreateProjectViewModel
     {
-        public int id { get; set; }
-        public string name { get; set; }
-        
+        [Required]
+        [Display(Name = "Project Name")]
+        public string name { get; set; }       
+       
     }
-    
 }

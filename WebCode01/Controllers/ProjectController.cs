@@ -30,14 +30,6 @@ namespace WebCode01.Controllers
             return View("Index", modelList);
         }
 
-        // Filter the user projects by type of projects, java, c++, etc
-        public ActionResult ProjectsByType(string type)
-        {
-            string id = User.Identity.GetUserId(); // Get current user id
-            List<ProjectListViewModel> model = service.GetUserProjectsByType(id, type);
-            IEnumerable<ProjectListViewModel> modelList = model;
-            return View("Index", modelList);
-        }
         public ActionResult CreateProject()
         {
             var model = new CreateProjectViewModel();
@@ -52,7 +44,7 @@ namespace WebCode01.Controllers
                 return View(model);
             }
             string id = User.Identity.GetUserId(); // Get current user id
-            service.AddProjectToDb(model,id);
+            service.AddProjectToDb(model, id);
 
             return RedirectToAction("Index");
         }

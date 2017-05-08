@@ -13,18 +13,7 @@
             @Html.ActionLink("Member Projects", "FilterProjects", new { isAuthor = false }, new { @class = "btn-class2 btn btn-default" })
             @Html.ActionLink("My Projects", "Index", "Project", new { @class = "btn-class2 btn btn-default" })
             @Html.ActionLink("Create Project", "CreateProject", "Project", new { @class = "btn-class2 btn btn-default" })
-            <div class="btn-group">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    Project type <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                    <li>@Html.ActionLink("C#", "ProjectsByType", new { type = "C#" })</li>
-                    <li>@Html.ActionLink("C++", "ProjectsByType", new { type = "C++" })</li>
-                    <li>@Html.ActionLink("Java", "ProjectsByType", new { type = "Java" })</li>
-                    <li>@Html.ActionLink("HTML", "ProjectsByType", new { type = "HTML" })</li>
-                    <li>@Html.ActionLink("CSS", "ProjectsByType", new { type = "CSS" })</li>
-                </ul>
-            </div>
+            
         </div>
     </div>
 </div>
@@ -38,7 +27,6 @@
             <div class="col-md-4">
                 <div class="cont well col-md-11">
                         <h3>@Html.ActionLink(item.name, "Index", "ProjectFiles", new { projectId = item.id }, null)</h3>
-                        <h3>@item.type</h3>
                 </div>
 
            </div>
