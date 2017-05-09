@@ -12,6 +12,7 @@ namespace WebCode01.Controllers
     {
         public ProjectFilesService service = new ProjectFilesService();
         // GET: ProjectFiles
+        [Authorize]
         public ActionResult Index(int projectId)
         {
             List<ProjectFileListViewModel> model = service.getProjectFilesById(projectId);
@@ -19,27 +20,31 @@ namespace WebCode01.Controllers
             {
                 ViewBag.projectId = model[0].projectId; // Fetch project id if file list isn't empty, use this in editor view to save file to database
             }
+           
             IEnumerable<ProjectFileListViewModel> modelList = model;
             return View(modelList);
         }
 
         // Filter the user projects by type of projects, java, c++, etc
+        [Authorize]
         public ActionResult FilesByType(int projectId, string fileType)
         {
             List<ProjectFileListViewModel> model = service.GetFilesByType(projectId, fileType);
             IEnumerable<ProjectFileListViewModel> modelList = model;
             return View("Index", modelList);
         }
-        
 
+        [Authorize]
         public ActionResult Editor(int fileId)
         {
             ProjectFileViewModel model = service.getFileById(fileId);
-            ViewBag.Code = model.fileContent;
             ViewBag.id = fileId;
+            ViewBag.name = model.name;
+            ViewBag.Code = model.fileContent;
             return View();
         }
 
+        [Authorize]
         public ActionResult AddMember(int projectId)
         {
             ViewBag.projectId = projectId;
@@ -57,11 +62,8 @@ namespace WebCode01.Controllers
 
             return RedirectToAction("Index", new { projectId = model.projectId });
         }
-       /* public ActionResult AddFile(int projectId)
-        {
-            ViewBag.projectId = projectId;
-            return View();
-        }*/
+
+        [Authorize]
         public ActionResult AddFile(int projectId)
         {
             ViewBag.projectId = projectId;

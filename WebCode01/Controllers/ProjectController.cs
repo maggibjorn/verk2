@@ -13,6 +13,7 @@ namespace WebCode01.Controllers
     {
         public ProjectService service = new ProjectService();
         // GET: Project
+        [Authorize]
         public ActionResult Index()
         { 
             string id = User.Identity.GetUserId(); // Get current user id
@@ -22,6 +23,7 @@ namespace WebCode01.Controllers
         }
 
         // Filter the user project list by member projects and user projects
+        [Authorize]
         public ActionResult FilterProjects(bool isAuthor)
         {
             string id = User.Identity.GetUserId(); // Get current user id
@@ -30,6 +32,7 @@ namespace WebCode01.Controllers
             return View("Index", modelList);
         }
 
+        [Authorize]
         public ActionResult CreateProject()
         {
             var model = new CreateProjectViewModel();
