@@ -19,6 +19,7 @@ namespace WebCode01.Controllers
             {
                 ViewBag.projectId = model[0].projectId; // Fetch project id if file list isn't empty, use this in editor view to save file to database
             }
+           
             IEnumerable<ProjectFileListViewModel> modelList = model;
             return View(modelList);
         }
@@ -35,8 +36,9 @@ namespace WebCode01.Controllers
         public ActionResult Editor(int fileId)
         {
             ProjectFileViewModel model = service.getFileById(fileId);
-            ViewBag.Code = model.fileContent;
             ViewBag.id = fileId;
+            ViewBag.name = model.name;
+            ViewBag.Code = model.fileContent;
             return View();
         }
 

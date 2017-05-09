@@ -1,12 +1,17 @@
 ﻿@model WebCode01.ViewModels.AddFileViewModel
+@{
+    ViewBag.Title = "Upload File";
+}
+
+<h2>Upload File</h2>
 @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div>
-        @Html.HiddenFor(x => x.projectId, new { @id = "hidden-projectId" })
+        @Html.HiddenFor(x => x.projectId, new { @id = "hidden-projectId" })       
         @Html.TextBoxFor(x => x.file, new { type = "file" })
     </div>
 
-    <input type="submit" value="Add File" class="btn btn-primary"/>
+    <input type="submit" value="Add File" class="btn btn-default"/>
 }
 @section scripts
 {

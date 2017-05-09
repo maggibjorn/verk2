@@ -38,6 +38,7 @@ namespace WebCode01.Services
                                select new ProjectFileViewModel
                                {
                                    id = f.id,
+                                   name = f.name,
                                    fileContent = f.fileContent
                                }).FirstOrDefault();
 

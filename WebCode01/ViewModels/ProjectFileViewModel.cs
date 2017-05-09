@@ -8,6 +8,7 @@ namespace WebCode01.ViewModels
     public class ProjectFileViewModel
     {
         public int id { get; set; }
+        public string name { get; set; }
         public string fileContent { get; set; }
     }
     public class AddFileViewModel
