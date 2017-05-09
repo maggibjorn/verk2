@@ -71,10 +71,22 @@ namespace WebCode01.Services
                 name = "index.html",
                 fileContent = "",
                 projectId = usersProject.id,
-                fileTypeId = 4 // The HTML type Id
+                fileTypeId = 4 // The HTML type Id, first file of project is always html
             };
             db.files.Add(firstFile);
             db.SaveChanges();
+        }
+
+        // Search project list of user
+        public List<ProjectListViewModel> ProjectSearch(string id, string searchValue)
+        {
+            var userProjects = getUserProjectList(id); // Get user project list
+
+            var result = (from u in userProjects
+                          where u.name.ToLower().Contains(searchValue.ToLower())
+                          select u).ToList();
+
+            return result;
         }
     }
 }

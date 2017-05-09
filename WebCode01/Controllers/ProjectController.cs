@@ -52,5 +52,16 @@ namespace WebCode01.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
+        public ActionResult ProjectSearch(FormCollection coll)
+        {
+            string id = User.Identity.GetUserId(); // Get current user id
+            string searchValue = coll["search"]; // Retrieve the search value
+            
+            List<ProjectListViewModel> model = service.ProjectSearch(id, searchValue);
+            IEnumerable<ProjectListViewModel> modelList = model;
+            return View("Index", modelList);
+        }
+
     }
 }
