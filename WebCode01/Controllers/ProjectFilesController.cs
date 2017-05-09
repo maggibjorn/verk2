@@ -73,6 +73,10 @@ namespace WebCode01.Controllers
         [HttpPost]
         public ActionResult AddFile(AddFileViewModel model)
         {
+            if(model.file == null)
+            {
+            return RedirectToAction("Index", new { projectId = model.projectId });
+            }
             service.saveFileToDb(model);
             return RedirectToAction("Index", new { projectId = model.projectId });
         }

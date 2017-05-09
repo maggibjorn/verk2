@@ -10,8 +10,7 @@
         @Html.HiddenFor(x => x.projectId, new { @id = "hidden-projectId" })       
         @Html.TextBoxFor(x => x.file, new { type = "file" })
     </div>
-
-    <input type="submit" value="Add File" class="btn btn-default"/>
+    <input type="submit" value="Add File" class="btn btn-primary"/>
 }
 @section scripts
 {
@@ -20,6 +19,19 @@
         $("form").submit(function () {
             $("#hidden-projectId").val(id);
         });
+
+    $(document).ready(
+    function () {
+        $('input:file').change(
+            function () {
+                if ($(this).val()) {
+                    $('input:submit').attr('disabled', false);
+                    // or, as has been pointed out elsewhere:
+                    // $('input:submit').removeAttr('disabled'); 
+                }
+            }
+            );
+    });
     </script>
 }
 
