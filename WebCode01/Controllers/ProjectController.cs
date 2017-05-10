@@ -11,7 +11,7 @@ namespace WebCode01.Controllers
 {
     public class ProjectController : Controller
     {
-        public ProjectService service = new ProjectService();
+        public ProjectService service = new ProjectService(null);
         // GET: Project
         [Authorize]
         public ActionResult Index()

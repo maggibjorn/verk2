@@ -10,10 +10,11 @@ namespace WebCode01.Services
 {
     public class ProjectFilesService
     {
-        private ApplicationDbContext db;
-        public ProjectFilesService()
+        private readonly IAppDataContext db;
+
+        public ProjectFilesService(IAppDataContext context)
         {
-            db = new ApplicationDbContext();
+            db = context ?? new ApplicationDbContext();
         }
 
         public List<ProjectFileListViewModel> getProjectFilesById(int projectId)

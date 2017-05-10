@@ -10,10 +10,11 @@ namespace WebCode01.Services
 {
     public class ProjectService
     {
-        private ApplicationDbContext db;
-        public ProjectService()
+        private readonly IAppDataContext db;
+        
+        public ProjectService(IAppDataContext context)
         {
-            db = new ApplicationDbContext();
+            db = context ?? new ApplicationDbContext();
         }
         
         public List<ProjectListViewModel> getUserProjectList(string id)
@@ -53,8 +54,7 @@ namespace WebCode01.Services
         {
             Project usersProject = new Project
             {
-                name = model.name
-                //projectTypeId = model.type
+                name = model.name                
             };
             db.projects.Add(usersProject);
             db.SaveChanges();

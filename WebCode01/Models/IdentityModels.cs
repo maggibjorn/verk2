@@ -5,11 +5,12 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using WebCode01.Entities;
 
+
 namespace WebCode01.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
-    {
+    {       
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -18,15 +19,31 @@ namespace WebCode01.Models
             return userIdentity;
         }
     }
-    
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public interface IAppDataContext
     {
-        public DbSet<Member> members { get; set; }
-        public DbSet<Project> projects { get; set; }
-        public DbSet<FileType> types { get; set; }
-        public DbSet<File> files { get; set; }
-        public DbSet<Comment> comments { get; set; }
+        IDbSet<Member> members { get; set; }
+        IDbSet<Project> projects { get; set; }
+        IDbSet<FileType> types { get; set; }
+        IDbSet<File> files { get; set; }
+        IDbSet<Comment> comments { get; set; }
+        IDbSet<ApplicationUser> Users { get; set; } // This variable has to be in Pascal casing 
+        int SaveChanges();
+        
+    }
+
+   
+
+
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IAppDataContext
+    {
+        public IDbSet<Member> members { get; set; }
+        public IDbSet<Project> projects { get; set; }
+        public IDbSet<FileType> types { get; set; }
+        public IDbSet<File> files { get; set; }
+        public IDbSet<Comment> comments { get; set; }
+      
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
