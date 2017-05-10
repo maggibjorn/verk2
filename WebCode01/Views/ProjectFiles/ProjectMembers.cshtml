@@ -1,0 +1,33 @@
+﻿@model IEnumerable<WebCode01.ViewModels.ProjectMemberViewModel>
+@{
+    ViewBag.Title = "Project Members";
+}
+
+<h2>List of current members in project</h2>
+
+<div class="container">
+    <div class="row">
+        <div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.name</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Back to project", "Index", new { projectId = @ViewBag.projectId }, new { @class = "btn btn-primary" })
+</div>
+

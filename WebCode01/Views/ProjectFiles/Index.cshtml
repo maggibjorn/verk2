@@ -46,6 +46,11 @@
 <div class="container">
     <span class="row">
         @Html.ActionLink("Upload File", "AddFile", "ProjectFiles", new { projectId = @ViewBag.projectId }, new { @class="btn btn-default"})
+        @Html.ActionLink("Current Members", "ProjectMembers", "ProjectFiles", new { projectId = @ViewBag.projectId }, new { @class = "btn btn-default" })
         @Html.ActionLink("Add Member", "AddMember", new { projectId = @ViewBag.projectId }, new { @class = "btn btn-default" })
+        @Html.ActionLink("Add Blank File", "CreateBlankFile", new { projectId = @ViewBag.projectId }, new { @class = "btn btn-default" })
     </span>
+    <div>
+        @Html.ActionLink("Back to Project List", "Index", "Project", null, new { @class = "btn btn-primary"})
+    </div>
 </div>

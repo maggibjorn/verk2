@@ -26,6 +26,7 @@ namespace WebCode01.Models
         public DbSet<Project> projects { get; set; }
         public DbSet<FileType> types { get; set; }
         public DbSet<File> files { get; set; }
+        public DbSet<Comment> comments { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

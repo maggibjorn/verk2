@@ -33,21 +33,11 @@
                 <div class="cont well col-md-11">
                         <h3>@Html.ActionLink(item.name, "Index", "ProjectFiles", new { projectId = item.id }, null)</h3>
                 </div>
-
-           </div>
-            
+           </div>            
         }
     </div>
 </div>
 
 
-@section scripts
-{
-    <script>
-        $('.cont').click(function () {
-            window.location.href = $('a', this).attr('href');
-            return false;
-        });
-    </script>
-}
+
 

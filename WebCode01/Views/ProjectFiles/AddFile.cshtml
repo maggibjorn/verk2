@@ -4,7 +4,7 @@
 }
 
 <h2>Upload File</h2>
-@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("AddFile", "ProjectFiles", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div>
         @Html.HiddenFor(x => x.projectId, new { @id = "hidden-projectId" })       
@@ -20,18 +20,6 @@
             $("#hidden-projectId").val(id);
         });
 
-    $(document).ready(
-    function () {
-        $('input:file').change(
-            function () {
-                if ($(this).val()) {
-                    $('input:submit').attr('disabled', false);
-                    // or, as has been pointed out elsewhere:
-                    // $('input:submit').removeAttr('disabled'); 
-                }
-            }
-            );
-    });
     </script>
 }
 

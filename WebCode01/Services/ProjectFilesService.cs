@@ -51,7 +51,7 @@ namespace WebCode01.Services
             var filesByType = (from f in db.files
                                join p in db.projects on f.projectId equals p.id
                                join t in db.types on f.fileTypeId equals t.id
-                               where t.name == type
+                               where t.name == type && p.id == projectId
                                select new ProjectFileListViewModel
                                {
                                    id = f.id,
@@ -133,6 +133,72 @@ namespace WebCode01.Services
             db.members.Add(newMember);
             db.SaveChanges();
         }
+
+        public void SaveBlankFileToDb(CreateBlankFileViewModel model)
+        {
+            var typeId = (from t in db.types
+                          where t.name.ToLower() == model.fileType.ToLower()
+                          select t.id).FirstOrDefault();
+            File file = new File
+            {
+                name = model.fileName,
+                fileContent = "",
+                fileTypeId = typeId,
+                projectId = model.projectId
+            };
+
+            db.files.Add(file);
+            db.SaveChanges();
+        }
+
+        public List<ProjectMemberViewModel> FindProjectMembers(int projectId)
+        {
+            var projectMembers = (from m in db.members
+                                  join p in db.projects on m.projectId equals p.id
+                                  join u in db.Users on m.userId equals u.Id
+                                  where m.projectId == projectId
+                                  select new ProjectMemberViewModel
+                                  {
+                                      name = u.UserName
+                                  }).ToList();
+            return projectMembers;
+        }
+
+        //-----Helper functions-----//
+
+        public int checkFileType(string ext)
+        {
+            int id;
+            if (ext == "cs")
+            {
+                id = 1;
+            }
+            else if (ext == "cpp")
+            {
+                id = 2;
+            }
+            else if (ext == "js")
+            {
+                id = 3;
+            }
+            else if (ext == "html")
+            {
+                id = 4;
+            }
+            else if (ext == "css")
+            {
+                id = 5;
+            }
+            else
+            {
+                id = 6; // Assign file as dat file if exstension in unknown
+            }
+
+            return id;
+        }
+
+
+
 
     }
 }

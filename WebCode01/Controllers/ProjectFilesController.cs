@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebCode01.ViewModels;
 using WebCode01.Services;
+using Microsoft.AspNet.Identity;
 
 namespace WebCode01.Controllers
 {
@@ -14,7 +15,7 @@ namespace WebCode01.Controllers
         // GET: ProjectFiles
         [Authorize]
         public ActionResult Index(int projectId)
-        {
+        {            
             List<ProjectFileListViewModel> model = service.getProjectFilesById(projectId);
             if (model.Count > 0)
             {
@@ -29,6 +30,7 @@ namespace WebCode01.Controllers
         [Authorize]
         public ActionResult FilesByType(int projectId, string fileType)
         {
+            ViewBag.projectId = Request.Url.ToString().Split('=')[1][0];
             List<ProjectFileListViewModel> model = service.GetFilesByType(projectId, fileType);
             IEnumerable<ProjectFileListViewModel> modelList = model;
             return View("Index", modelList);
@@ -80,6 +82,51 @@ namespace WebCode01.Controllers
             service.saveFileToDb(model);
             return RedirectToAction("Index", new { projectId = model.projectId });
         }
+
+        [Authorize]
+        public ActionResult CreateBlankFile(int projectId)
+        {
+            ViewBag.projectId = projectId;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateBlankFile(FormCollection coll)
+        {
+            string fName = coll["fileName"];
+            string type = coll["type"];
+            string projectId = coll["projectId"];
+            int numId;
+            bool test = Int32.TryParse(projectId, out numId);
+            if (!test)
+            {
+                // Error
+            }
+            CreateBlankFileViewModel model = new CreateBlankFileViewModel
+            {
+                fileName = fName, // Add file exstension to name
+                projectId = numId,
+                fileType = type
+            };
+
+            if (model.fileName == null)
+            {
+                return RedirectToAction("Index", new { projectId = model.projectId });
+            }
+            service.SaveBlankFileToDb(model);
+            return RedirectToAction("Index", new { projectId = numId});
+        }
+
+        // List up all project members in project
+        public ActionResult ProjectMembers(int projectId)
+        {
+            ViewBag.projectId = Request.Url.ToString().Split('=')[1]; // Use this to make "back to project" button
+            List<ProjectMemberViewModel> model = service.FindProjectMembers(projectId);
+            IEnumerable<ProjectMemberViewModel> modelList = model;
+            return View(modelList);
+        }
+
+       
 
     }
 }

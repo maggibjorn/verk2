@@ -1,0 +1,33 @@
+﻿@model WebCode01.ViewModels.CreateBlankFileViewModel
+@{
+    ViewBag.Title = "Create Blank File";
+}
+
+<h2>Create Blank File</h2>
+
+@using (Html.BeginForm("CreateBlankFile", "ProjectFiles", FormMethod.Post))
+{
+    <div>
+        @Html.HiddenFor(x => x.projectId, new { @id = "hidden-projectId" })
+        @Html.TextBoxFor(x => x.fileName, new { type = "text" })
+        <select name="type">
+            <option value="c#">C#</option>
+            <option value="c++">C++</option>
+            <option value="javascript">Javascript</option>
+            <option value="html">HTML</option>
+            <option value="css">CSS</option>
+        </select>
+    </div>
+    
+    <input type="submit" value="Add File" class="btn btn-primary" />
+}
+@section scripts
+{
+    <script>
+        var id = '@Html.Raw(@ViewBag.projectId)';
+        $("form").submit(function () {
+            $("#hidden-projectId").val(id);
+        });
+    </script>
+}
+
