@@ -83,31 +83,8 @@ namespace WebCode01.Services
             }
             // Check file type
             string fileType = model.file.FileName.Split('.')[1].ToLower();
-            int typeId;
-            if (fileType == "cs")
-            {
-                typeId = 1;
-            }
-            else if (fileType == "cpp")
-            {
-                typeId = 2;
-            }
-            else if (fileType == "js")
-            {
-                typeId = 3;
-            }
-            else if (fileType == "html")
-            {
-                typeId = 4;
-            }
-            else if (fileType == "css")
-            {
-                typeId = 5;
-            }
-            else
-            {
-                typeId = 6; // Assign file as dat file if exstension in unknown
-            }
+            int typeId = checkFileType(fileType);
+            
             string content = string.Join(Environment.NewLine, file.ToArray());
             File newFile = new File
             {
@@ -139,9 +116,11 @@ namespace WebCode01.Services
             var typeId = (from t in db.types
                           where t.name.ToLower() == model.fileType.ToLower()
                           select t.id).FirstOrDefault();
+
+            string ext = getFileExstension(model.fileType.ToLower());
             File file = new File
             {
-                name = model.fileName,
+                name = model.fileName + "." + ext,
                 fileContent = "",
                 fileTypeId = typeId,
                 projectId = model.projectId
@@ -197,6 +176,36 @@ namespace WebCode01.Services
             return id;
         }
 
+        public string getFileExstension(string fileType)
+        {
+            string ext;
+            if (fileType == "c#")
+            {
+                ext = "cs";
+            }
+            else if (fileType == "c++")
+            {
+                ext = "cpp";
+            }
+            else if (fileType == "javascript")
+            {
+                ext = "js";
+            }
+            else if (fileType == "html")
+            {
+                ext = "html";
+            }
+            else if (fileType == "css")
+            {
+                ext = "css";
+            }
+            else
+            {
+                ext = "cs"; // Assign file as dat file if fileType in unknown
+            }
+
+            return ext;
+        }
 
 
 
