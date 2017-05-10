@@ -12,7 +12,7 @@ namespace WebCode01.Controllers
 {
     public class ProjectFilesController : Controller
     {
-        public ProjectFilesService service = new ProjectFilesService();
+        public ProjectFilesService service = new ProjectFilesService(null);
         // GET: ProjectFiles
         [Authorize]
         public ActionResult Index(int projectId)
