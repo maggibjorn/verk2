@@ -97,7 +97,7 @@ namespace WebCode01.Services
             db.SaveChanges();
 
         }
-        public void AddMember(AddMemberViewModel model)
+        public void AddMember(AddMemberViewModel model, int? Id)
         {
             var userId = (from u in db.Users
                        where model.userEmail == u.Email
@@ -128,6 +128,18 @@ namespace WebCode01.Services
 
             db.files.Add(file);
             db.SaveChanges();
+        }
+        public bool CheckFileName(string fileName, int projectId)
+        {
+            var name = (from u in db.files
+                        where u.projectId == projectId && u.name == fileName
+                        select u).ToList();
+            if(name.Count() == 0)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public List<ProjectMemberViewModel> FindProjectMembers(int projectId)
@@ -207,7 +219,48 @@ namespace WebCode01.Services
             return ext;
         }
 
+        public List<AddMemberViewModel> MemberSearch(string searchValue, int projectId)
+        {
+            var result = (from u in db.Users
+                          where u.Email.ToLower().Contains(searchValue.ToLower())
+                          select new AddMemberViewModel
+                          {
+                              userEmail = u.Email,
+                              projectId = projectId
+                          }).ToList();
+            
+            return result;
+        }
 
+        public List<AddMemberViewModel> getMembers(int projectId)
+        {
+            var members = (from m in db.members
+                           join u in db.Users on m.userId equals u.Id
+                           where m.id == projectId
+                           select new AddMemberViewModel
+                           {
+                               projectId = m.id,
+                               userEmail = u.Email
+                           }).ToList();
+            return members;
+        }
 
+        public bool IsInProject(string email, int projectId)
+        {
+            var userId = (from u in db.Users
+                          where u.Email == email
+                          select u.Id).FirstOrDefault();
+
+            var test = (from m in db.members
+                        where m.userId == userId && m.projectId == projectId
+                        select m).ToList();
+
+            if (test.Count == 0)
+            {
+                return true;
+            }
+            return false;
+        }
+           
     }
 }

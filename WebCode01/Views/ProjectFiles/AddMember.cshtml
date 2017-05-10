@@ -1,25 +1,47 @@
-﻿@model WebCode01.ViewModels.AddMemberViewModel
+﻿@model Tuple<int,IEnumerable<WebCode01.ViewModels.AddMemberViewModel>>
 @{
-    ViewBag.Title = "Add Member";
+    ViewBag.Title = "AddMember";
 }
-
 <h2>AddMember</h2>
 
-@using (Html.BeginForm("AddMember", "ProjectFiles", FormMethod.Post))
-{
-        @Html.LabelFor(m => m.userEmail, htmlAttributes: new { @class = "control-label col-md-2" })
-        @Html.TextBoxFor(m => m.userEmail)
-        @Html.HiddenFor(m => m.projectId, new { @id = "hidden-projectId" })
-        <input type="submit" value="Add Member" class="btn-btn-default" />
-}
+<div clss="col-md-4">
+    <form id="search" method="post" action="@Url.Action("SearchMember", "ProjectFiles", new { projectId = Model.Item1 })">
+        <span class="glyphicon glyphicon-search"></span>
+        <input type="text" name="search" id="search" value="Search" />
+        <input type="hidden" name="projectId" id="hidden-projectId" />
+        <button type="submit" class="btn btn-default">Search For Member</button>
+    </form>
+</div>
+<div class="container">
+
+    @foreach (var item in Model.Item2)
+    {
+        <div clss="col-md-4">
+            <form class="add" method="post" action="@Url.Action("AddMember", "ProjectFiles", new { Id = Model.Item1 },null)">
+                <input type="text" name="email" id="email" value="@item.userEmail" readonly />
+                <input type="hidden" name="projectId" class="hidden-projectId2" />
+                <button type="submit" class="btn btn-default" value="AddMember">ADD</button>
+            </form>
+        </div>
+    }
+</div>
+
 
 @section scripts
 {
     <script>
         var id = '@Html.Raw(@ViewBag.projectId)';
-        $("form").submit(function () {
-            $("#hidden-projectId").val(id);
-        });
+            $(document).ready(function () {
+                $("#search").submit(function () {
+                    $("#hidden-projectId").val(id);
+                });
+            });
+            var Id = '@Html.Raw(@ViewBag.projectId)';
+            $(document).ready(function () {
+                $(".add").submit(function () {
+                    $(".hidden-projectId2").val(Id);
+                });
+            });
 
     </script>
 }

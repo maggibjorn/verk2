@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using WebCode01.ViewModels;
 using WebCode01.Services;
 using Microsoft.AspNet.Identity;
+using WebCode01.Entities;
 
 namespace WebCode01.Controllers
 {
@@ -46,7 +47,7 @@ namespace WebCode01.Controllers
             return View();
         }
 
-        [Authorize]
+        /*[Authorize]
         public ActionResult AddMember(int projectId)
         {
             ViewBag.projectId = projectId;
@@ -63,7 +64,7 @@ namespace WebCode01.Controllers
             service.AddMember(model);
 
             return RedirectToAction("Index", new { projectId = model.projectId });
-        }
+        }*/
 
         [Authorize]
         public ActionResult AddFile(int projectId)
@@ -75,7 +76,9 @@ namespace WebCode01.Controllers
         [HttpPost]
         public ActionResult AddFile(AddFileViewModel model)
         {
-            if(model.file == null)
+            bool nameTaken = service.CheckFileName(model.file.FileName, model.projectId);
+
+            if(model.file == null || nameTaken == true)
             {
             return RedirectToAction("Index", new { projectId = model.projectId });
             }
@@ -109,8 +112,9 @@ namespace WebCode01.Controllers
                 projectId = numId,
                 fileType = type
             };
-
-            if (model.fileName == null)
+            string name = model.fileName + "." + model.fileType;
+            bool nameTaken = service.CheckFileName(name, model.projectId);//check if name is taken
+            if (model.fileName == null || nameTaken == true)
             {
                 return RedirectToAction("Index", new { projectId = model.projectId });
             }
@@ -127,8 +131,50 @@ namespace WebCode01.Controllers
             return View(modelList);
         }
 
-       
+        [Authorize]
+        public ActionResult AddMember(int projectId)
+        {
+            string u = Request.Url.ToString().Split('=')[1];
+            int theId;
+            Int32.TryParse(u, out theId);
+            ViewBag.projectId = theId;
+            List<AddMemberViewModel> members = service.getMembers(projectId);
+            IEnumerable<AddMemberViewModel> modelList = members;
+            return View(Tuple.Create(projectId, modelList));
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddMember(FormCollection coll, int Id)
+        {
+            string email = coll["email"];
+            int id = Id;
+
+            AddMemberViewModel model = new AddMemberViewModel();
+            model.projectId = id;
+            model.userEmail = email;
+
+            bool checkIfMemberExist = service.IsInProject(email, id);
+            if(checkIfMemberExist==true)
+            {
+                service.AddMember(model, id);
+            }
+
+            return RedirectToAction("Index", new { projectId = model.projectId });
+        }
 
 
+        [Authorize]
+        public ActionResult SearchMember(FormCollection coll)
+        {
+            string searchValue = coll["search"];
+            string Id = coll["projectId"];
+            int id;
+            string u = Request.Url.ToString();
+            Int32.TryParse(Id, out id);
+            List<AddMemberViewModel> emails = service.MemberSearch(searchValue, id);
+            IEnumerable<AddMemberViewModel> modelList = emails;
+            return View("AddMember",Tuple.Create(id, modelList));
+        }
     }
 }
