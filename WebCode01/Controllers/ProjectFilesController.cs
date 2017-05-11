@@ -87,6 +87,7 @@ namespace WebCode01.Controllers
         {
             string fName = coll["fileName"];
             string type = coll["type"];
+            string ext = service.GetFileExstension(type);
             string projectId = coll["projectId"];
             int numId;
             bool test = Int32.TryParse(projectId, out numId);
@@ -96,12 +97,12 @@ namespace WebCode01.Controllers
             }
             CreateBlankFileViewModel model = new CreateBlankFileViewModel
             {
-                fileName = fName, // Add file exstension to name
+                fileName = fName + "." + ext, // Add file exstension to name
                 projectId = numId,
                 fileType = type
             };
-            string name = model.fileName + "." + model.fileType;
-            bool nameTaken = service.CheckFileName(name, model.projectId);//check if name is taken
+    
+            bool nameTaken = service.CheckFileName(model.fileName, model.projectId); //check if name is taken
             if (string.IsNullOrEmpty(model.fileName)|| nameTaken == true)
             {
                 return RedirectToAction("Index", new { projectId = model.projectId });

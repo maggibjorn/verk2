@@ -129,10 +129,9 @@ namespace WebCode01.Services
                           where t.name.ToLower() == model.fileType.ToLower()
                           select t.id).FirstOrDefault();
 
-            string ext = GetFileExstension(model.fileType.ToLower());
             File file = new File
             {
-                name = model.fileName + "." + ext,
+                name = model.fileName,
                 fileContent = "",
                 fileTypeId = typeId,
                 projectId = model.projectId

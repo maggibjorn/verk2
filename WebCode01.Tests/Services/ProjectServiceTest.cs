@@ -126,7 +126,7 @@ namespace WebCode01.Tests.Services
             const string userId = "a"; // The id of user John
 
             // Act:
-            var result = service.getUserProjectList(userId);
+            var result = service.GetUserProjectList(userId);
 
             // Assert:
             Assert.AreEqual(3, result.Count); // John has three projects so GetUserProjectList needs to return 3
@@ -143,7 +143,7 @@ namespace WebCode01.Tests.Services
             const string userId = "b"; // The id of user Lue
 
             // Act:
-            var result = service.getUserProjectList(userId);
+            var result = service.GetUserProjectList(userId);
 
             // Assert:
             Assert.AreEqual(2, result.Count); // John has two projects so GetUserProjectList needs to return 2
@@ -159,7 +159,7 @@ namespace WebCode01.Tests.Services
             const string userId = "c"; // The id of user Sarah
 
             // Act:
-            var result = service.getUserProjectList(userId);
+            var result = service.GetUserProjectList(userId);
 
             // Assert:
             Assert.AreEqual(0, result.Count); // John has two projects so GetUserProjectList needs to return 2

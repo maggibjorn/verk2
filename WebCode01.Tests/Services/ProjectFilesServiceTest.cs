@@ -236,7 +236,7 @@ namespace WebCode01.Tests.Services
             const int projectId = 2; // The id of the project
 
             // Act:
-            var result = service.getProjectFilesById(projectId);
+            var result = service.GetProjectFilesById(projectId);
 
             // Assert:
             Assert.IsTrue(result.Count == 1 && result[0].fileName == "style.CSS");            
@@ -252,7 +252,7 @@ namespace WebCode01.Tests.Services
             const int fileId = 7; // The id of the file
 
             // Act:
-            var result = service.getFileById(fileId);
+            var result = service.GetFileById(fileId);
 
             // Assert:
             Assert.IsTrue(result.name == "testing101.cpp");
@@ -267,7 +267,7 @@ namespace WebCode01.Tests.Services
             const int fileId = 33; // No file has id = 33
 
             // Act:
-            var result = service.getFileById(fileId);
+            var result = service.GetFileById(fileId);
 
             // Assert:
             Assert.AreEqual(null, result);
