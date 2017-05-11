@@ -240,6 +240,7 @@
     <Compile Include="ViewModels\AddMemberViewModel.cs" />
     <Compile Include="ViewModels\CreateBlankFileViewModel.cs" />
     <Compile Include="ViewModels\CreateProjectViewModel.cs" />
+    <Compile Include="ViewModels\KickMemberViewModel.cs" />
     <Compile Include="ViewModels\ProjectFileListViewModel.cs" />
     <Compile Include="ViewModels\ProjectFileViewModel.cs" />
     <Compile Include="ViewModels\ProjectListViewModel.cs" />
@@ -314,6 +315,8 @@
     <Content Include="Views\ProjectFiles\CreateBlankFile.cshtml" />
     <Content Include="Views\Project\DeleteProject.cshtml" />
     <Content Include="Views\ProjectFiles\ComfirmDelete.cshtml" />
+    <Content Include="Views\Project\KickMember.cshtml" />
+    <Content Include="Views\ProjectFiles\KickThisMember.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AceEditor\src\" />

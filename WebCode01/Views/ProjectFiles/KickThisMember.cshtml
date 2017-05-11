@@ -1,0 +1,14 @@
+﻿@model Tuple<WebCode01.ViewModels.ProjectMemberViewModel,int,string>
+
+@{
+    ViewBag.Title = "KickThisMember";
+}
+<div class="container">
+    <h2>Are You Sure?</h2>
+    <h4>Do you want to kick <b>@Model.Item1.name</b> from <b> @Model.Item3 </b></h4>
+</div>
+@using (Html.BeginForm("ConfirmKick", "ProjectFiles", new { email = Model.Item1.name, projectId = Model.Item2 }, FormMethod.Post, new { @class = "btn btn-danger" }))
+{
+    <input type="submit" value="Kick Member" class="btn btn-danger">
+}
+

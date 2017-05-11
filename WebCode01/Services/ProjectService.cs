@@ -88,5 +88,28 @@ namespace WebCode01.Services
 
             return result;
         }
+        public List<KickMemberViewModel> GetMyProjectsAndMembers(string userId, bool isAuthor)
+        {
+            var authorProjects = FilterProjects(userId, true);
+
+            List<KickMemberViewModel> members = new List<KickMemberViewModel>();
+            foreach(var item in authorProjects)
+            {
+                var getMembers = (from m in db.members
+                                  join u in db.Users on m.userId equals u.Id
+                                  where m.projectId == item.id && m.userId != userId
+                                  select new AddMemberViewModel
+                                  {
+                                      projectId = m.projectId,
+                                      userEmail = u.Email
+                                  }).ToList();
+                KickMemberViewModel info = new KickMemberViewModel();
+                info.name = item.name;
+                info.projectId = item.id;
+                info.members = getMembers;
+                members.Add(info);
+            }
+            return members;
+        }
     }
 }

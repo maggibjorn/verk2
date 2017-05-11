@@ -71,5 +71,12 @@ namespace WebCode01.Controllers
             IEnumerable<ProjectListViewModel> modelList = myProjects;
             return View("DeleteProject", modelList);
         }
+        public ActionResult KickMember()
+        {
+            string userId = User.Identity.GetUserId();
+            List<KickMemberViewModel> myProjects = service.GetMyProjectsAndMembers(userId, true);
+            IEnumerable<KickMemberViewModel> modelList = myProjects;
+            return View("KickMember", modelList);
+        }
     }
 }

@@ -4,23 +4,25 @@
     ViewBag.Title = "DeletProject";
 }
 
-<h2>DeletProject</h2>
+<h2>Delet Project</h2>
+<h4>You can only delete your own projects</h4>
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.name)
+            <h4>Project Name</h4>
         </th>
-        <th></th>
+        <th>
+        </th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.name)
+            <h4><b>@Html.DisplayFor(modelItem => item.name)</b></h4>
         </td>
         <td>
-            @Html.ActionLink("Delete", "ComfirmDelete", "ProjectFiles" , new {projectId = @item.id}, null)
+            @Html.ActionLink("Delete", "ComfirmDelete", "ProjectFiles" , new {projectId = @item.id}, new { @class = "btn btn-danger" })
         </td>
     </tr>
 }

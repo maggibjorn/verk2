@@ -12,10 +12,10 @@ namespace WebCode01.Hubs
     public class CodeHub : Hub
     {
         public ProjectFilesService service = new ProjectFilesService(null);
-        public void OnChange(object changeData, int documentId, string content)
+        public void OnChange(object changeData, int documentId, string content, string userId)
         {
             //Clients.All.OnChange(changeData);
-            Clients.Group(Convert.ToString(documentId), Context.ConnectionId).OnChange(changeData);
+            Clients.Group(Convert.ToString(documentId), Context.ConnectionId).OnChange(changeData, userId);
             
             ProjectFileViewModel model = new ProjectFileViewModel
             {

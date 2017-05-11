@@ -290,6 +290,20 @@ namespace WebCode01.Services
             db.projects.Remove(deleteProject);
             db.SaveChanges();
         }
+        public void DeleteMemberFromProject(string email, int projectId)
+        {
+            var userId = (from u in db.Users
+                          where u.Email == email
+                          select u.Id).FirstOrDefault();
+
+            var project = (from m in db.members
+                           where m.userId == userId && m.projectId == projectId
+                           select m).FirstOrDefault();
+
+            db.members.Remove(project);
+            db.SaveChanges();
+        }
+
 
     }
 }

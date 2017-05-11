@@ -43,6 +43,7 @@ namespace WebCode01.Controllers
             ViewBag.id = fileId;
             ViewBag.name = model.name;
             ViewBag.Code = model.fileContent;
+            ViewBag.userId = User.Identity.GetUserId();
             return View();
         }
 
@@ -191,6 +192,18 @@ namespace WebCode01.Controllers
         {
             string userId = User.Identity.GetUserId();
             service.DeleteProject(projectId);
+            return RedirectToAction("Index", "Project");
+        }
+        [Authorize]
+        public ActionResult KickThisMember(int projectId, string email, string projectName)
+        {
+            ProjectMemberViewModel kickThisMember = new ProjectMemberViewModel();
+            kickThisMember.name = email;
+            return View("KickThisMember", Tuple.Create(kickThisMember,projectId,projectName));
+        }
+        public ActionResult ConfirmKick(string email, int projectId)
+        {
+            service.DeleteMemberFromProject(email, projectId);
             return RedirectToAction("Index", "Project");
         }
     }
