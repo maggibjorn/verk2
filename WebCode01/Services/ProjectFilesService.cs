@@ -243,6 +243,7 @@ namespace WebCode01.Services
                                projectId = m.id,
                                userEmail = u.Email
                            }).ToList();
+
             return members;
         }
 
@@ -262,6 +263,30 @@ namespace WebCode01.Services
             }
             return false;
         }
-           
+        public void DeleteProject(int projectId)
+        {
+            var deleteConnection = (from m in db.members
+                                    where m.projectId == projectId
+                                    select m).ToList();
+            foreach(var item in deleteConnection)
+            {
+                db.members.Remove(item);
+                db.SaveChanges();
+            }
+            var deleteFiles = (from f in db.files
+                                    where f.projectId == projectId
+                                    select f).ToList();
+            foreach (var item in deleteFiles)
+            {
+                db.files.Remove(item);
+                db.SaveChanges();
+            }
+            var deleteProject = (from p in db.projects
+                                 where p.id == projectId
+                                 select p).FirstOrDefault();
+            db.projects.Remove(deleteProject);
+            db.SaveChanges();
+        }
+
     }
 }

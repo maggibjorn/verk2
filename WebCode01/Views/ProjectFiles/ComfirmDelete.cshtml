@@ -1,0 +1,49 @@
+﻿@model Tuple <IEnumerable<WebCode01.ViewModels.ProjectMemberViewModel>,IEnumerable<WebCode01.ViewModels.ProjectFileListViewModel>,int>
+
+@{
+    ViewBag.Title = "ComfirmDelete";
+}
+
+<h2>ComfirmDelete</h2>
+<div class="container">
+    <div class="col-lg-4">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th><h2>Project Files</h2></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Item2)
+                {
+                    <tr>
+                        <td>@item.fileName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-lg-4">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th><h2>Project Members</h2></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Item1)
+                {
+                    <tr>
+                        <td>@item.name</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+    <div>
+    @using (Html.BeginForm("ConfirmDelete", "ProjectFiles", new { projectId = Model.Item3 }, FormMethod.Post, new { @class = "btn btn-danger" }))
+    {
+        <input type="submit" value="DELETE PROJECT" class="btn btn-danger">
+    }
+    </div>
