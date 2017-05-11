@@ -43,7 +43,8 @@ namespace WebCode01.Services
                                 where u.Id == id && m.isAuthor == isAuthor
                                 select new ProjectListViewModel
                                 {
-                                    name = p.name,                                    
+                                    name = p.name,
+                                    id = p.id                                    
 
                                 }).ToList();
             

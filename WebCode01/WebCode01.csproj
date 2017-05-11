@@ -312,6 +312,8 @@
     <Content Include="Views\ProjectFiles\AddFile.cshtml" />
     <Content Include="Views\ProjectFiles\ProjectMembers.cshtml" />
     <Content Include="Views\ProjectFiles\CreateBlankFile.cshtml" />
+    <Content Include="Views\Project\DeleteProject.cshtml" />
+    <Content Include="Views\ProjectFiles\ComfirmDelete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AceEditor\src\" />

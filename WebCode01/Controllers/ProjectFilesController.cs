@@ -22,7 +22,6 @@ namespace WebCode01.Controllers
             {
                 ViewBag.projectId = model[0].projectId; // Fetch project id if file list isn't empty, use this in editor view to save file to database
             }
-           
             IEnumerable<ProjectFileListViewModel> modelList = model;
             return View(modelList);
         }
@@ -175,6 +174,24 @@ namespace WebCode01.Controllers
             List<AddMemberViewModel> emails = service.MemberSearch(searchValue, id);
             IEnumerable<AddMemberViewModel> modelList = emails;
             return View("AddMember",Tuple.Create(id, modelList));
+        }
+        [Authorize]
+        public ActionResult ComfirmDelete(int projectId)
+        {
+            List<ProjectFileListViewModel> projectFiles = service.getProjectFilesById(projectId);
+            IEnumerable<ProjectFileListViewModel> files = projectFiles;
+            List<ProjectMemberViewModel> projectMembers = service.FindProjectMembers(projectId);
+            IEnumerable<ProjectMemberViewModel> members = projectMembers;
+            return View("ComfirmDelete", Tuple.Create(members,files,projectId));
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult ConfirmDelete(int projectId)
+        {
+            string userId = User.Identity.GetUserId();
+            service.DeleteProject(projectId);
+            return RedirectToAction("Index", "Project");
         }
     }
 }

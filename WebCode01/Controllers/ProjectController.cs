@@ -63,5 +63,13 @@ namespace WebCode01.Controllers
             return View("Index", modelList);
         }
 
+        [Authorize]
+        public ActionResult DeleteProject()
+        {
+            string userId = User.Identity.GetUserId();
+            List<ProjectListViewModel> myProjects = service.FilterProjects(userId, true);
+            IEnumerable<ProjectListViewModel> modelList = myProjects;
+            return View("DeleteProject", modelList);
+        }
     }
 }
