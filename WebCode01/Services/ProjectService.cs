@@ -17,7 +17,7 @@ namespace WebCode01.Services
             db = context ?? new ApplicationDbContext();
         }
         
-        public List<ProjectListViewModel> getUserProjectList(string id)
+        public List<ProjectListViewModel> GetUserProjectList(string id)
         {
             
             var userProjects = (from p in db.projects
@@ -27,9 +27,7 @@ namespace WebCode01.Services
                                 select new ProjectListViewModel
                                 {
                                     id = p.id,
-                                    name = p.name,
-                                    
-                                    
+                                    name = p.name,                                                                       
                                 }).ToList();
                      
             return userProjects;
@@ -45,9 +43,8 @@ namespace WebCode01.Services
                                 {
                                     name = p.name,
                                     id = p.id                                    
-
-                                }).ToList();
-            
+                                }).ToList();   
+                     
             return filter;
         }
 
@@ -59,6 +56,7 @@ namespace WebCode01.Services
             };
             db.projects.Add(usersProject);
             db.SaveChanges();
+
             Member newConnection = new Member
             {
                 projectId = usersProject.id,
@@ -67,6 +65,7 @@ namespace WebCode01.Services
             };
             db.members.Add(newConnection);
             db.SaveChanges();
+
             File firstFile = new File
             {
                 name = "index.html",
@@ -81,7 +80,7 @@ namespace WebCode01.Services
         // Search project list of user
         public List<ProjectListViewModel> ProjectSearch(string id, string searchValue)
         {
-            var userProjects = getUserProjectList(id); // Get user project list
+            var userProjects = GetUserProjectList(id); // Get user project list
 
             var result = (from u in userProjects
                           where u.name.ToLower().Contains(searchValue.ToLower())

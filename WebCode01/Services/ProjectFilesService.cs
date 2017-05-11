@@ -17,7 +17,7 @@ namespace WebCode01.Services
             db = context ?? new ApplicationDbContext();
         }
 
-        public List<ProjectFileListViewModel> getProjectFilesById(int projectId)
+        public List<ProjectFileListViewModel> GetProjectFilesById(int projectId)
         {
             var files = (from f in db.files
                          join p in db.projects on f.projectId equals p.id
@@ -32,7 +32,7 @@ namespace WebCode01.Services
             return files;
         }
 
-        public ProjectFileViewModel getFileById(int fileId)
+        public ProjectFileViewModel GetFileById(int fileId)
         {
             var fileDetails = (from f in db.files
                                where f.id == fileId
@@ -63,7 +63,7 @@ namespace WebCode01.Services
             return filesByType;
         }
 
-        public void saveCodeToDb(ProjectFileViewModel model)
+        public void SaveCodeToDb(ProjectFileViewModel model)
         {
             var file = (from f in db.files
                         where f.id == model.id
@@ -72,7 +72,7 @@ namespace WebCode01.Services
             db.SaveChanges();
 
         }
-        public void saveFileToDb(AddFileViewModel model)
+        public void SaveFileToDb(AddFileViewModel model)
         {   
             List<string> file = new List<string>();
             using (System.IO.StreamReader reader = new System.IO.StreamReader(model.file.InputStream))
@@ -103,6 +103,7 @@ namespace WebCode01.Services
             var userId = (from u in db.Users
                        where model.userEmail == u.Email
                        select u.Id).FirstOrDefault();
+
             Member newMember = new Member()
             {
                 projectId = model.projectId,
@@ -118,7 +119,7 @@ namespace WebCode01.Services
                           where t.name.ToLower() == model.fileType.ToLower()
                           select t.id).FirstOrDefault();
 
-            string ext = getFileExstension(model.fileType.ToLower());
+            string ext = GetFileExstension(model.fileType.ToLower());
             File file = new File
             {
                 name = model.fileName + "." + ext,
@@ -126,7 +127,6 @@ namespace WebCode01.Services
                 fileTypeId = typeId,
                 projectId = model.projectId
             };
-
             db.files.Add(file);
             db.SaveChanges();
         }
@@ -135,6 +135,7 @@ namespace WebCode01.Services
             var name = (from u in db.files
                         where u.projectId == projectId && u.name == fileName
                         select u).ToList();
+
             if(name.Count() == 0)
             {
                 return false;
@@ -153,9 +154,10 @@ namespace WebCode01.Services
                                   {
                                       name = u.UserName
                                   }).ToList();
+
             return projectMembers;
         }
-
+   
         //-----Helper functions-----//
 
         public int checkFileType(string ext)
@@ -189,7 +191,7 @@ namespace WebCode01.Services
             return id;
         }
 
-        public string getFileExstension(string fileType)
+        public string GetFileExstension(string fileType)
         {
             string ext;
             if (fileType == "c#")
@@ -233,7 +235,7 @@ namespace WebCode01.Services
             return result;
         }
 
-        public List<AddMemberViewModel> getMembers(int projectId)
+        public List<AddMemberViewModel> GetMembers(int projectId)
         {
             var members = (from m in db.members
                            join u in db.Users on m.userId equals u.Id
@@ -263,6 +265,7 @@ namespace WebCode01.Services
             }
             return false;
         }
+
         public void DeleteProject(int projectId)
         {
             var deleteConnection = (from m in db.members

@@ -17,7 +17,7 @@ namespace WebCode01.Controllers
         [Authorize]
         public ActionResult Index(int projectId)
         {            
-            List<ProjectFileListViewModel> model = service.getProjectFilesById(projectId);
+            List<ProjectFileListViewModel> model = service.GetProjectFilesById(projectId);
             if (model.Count > 0)
             {
                 ViewBag.projectId = model[0].projectId; // Fetch project id if file list isn't empty, use this in editor view to save file to database
@@ -39,7 +39,7 @@ namespace WebCode01.Controllers
         [Authorize]
         public ActionResult Editor(int fileId)
         {
-            ProjectFileViewModel model = service.getFileById(fileId);
+            ProjectFileViewModel model = service.GetFileById(fileId);
             ViewBag.id = fileId;
             ViewBag.name = model.name;
             ViewBag.Code = model.fileContent;
@@ -81,7 +81,7 @@ namespace WebCode01.Controllers
             {
             return RedirectToAction("Index", new { projectId = model.projectId });
             }
-            service.saveFileToDb(model);
+            service.SaveFileToDb(model);
             return RedirectToAction("Index", new { projectId = model.projectId });
         }
 
@@ -137,7 +137,7 @@ namespace WebCode01.Controllers
             int theId;
             Int32.TryParse(u, out theId);
             ViewBag.projectId = theId;
-            List<AddMemberViewModel> members = service.getMembers(projectId);
+            List<AddMemberViewModel> members = service.GetMembers(projectId);
             IEnumerable<AddMemberViewModel> modelList = members;
             return View(Tuple.Create(projectId, modelList));
         }
@@ -178,7 +178,7 @@ namespace WebCode01.Controllers
         [Authorize]
         public ActionResult ComfirmDelete(int projectId)
         {
-            List<ProjectFileListViewModel> projectFiles = service.getProjectFilesById(projectId);
+            List<ProjectFileListViewModel> projectFiles = service.GetProjectFilesById(projectId);
             IEnumerable<ProjectFileListViewModel> files = projectFiles;
             List<ProjectMemberViewModel> projectMembers = service.FindProjectMembers(projectId);
             IEnumerable<ProjectMemberViewModel> members = projectMembers;

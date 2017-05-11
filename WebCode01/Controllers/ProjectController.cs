@@ -17,7 +17,7 @@ namespace WebCode01.Controllers
         public ActionResult Index()
         { 
             string id = User.Identity.GetUserId(); // Get current user id
-            List<ProjectListViewModel> model = service.getUserProjectList(id);
+            List<ProjectListViewModel> model = service.GetUserProjectList(id);
             IEnumerable<ProjectListViewModel> modelList = model;
             return View(modelList);
         }

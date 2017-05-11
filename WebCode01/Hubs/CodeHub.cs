@@ -22,7 +22,7 @@ namespace WebCode01.Hubs
                 id = documentId,
                 fileContent = content
             };
-            service.saveCodeToDb(model); // Save editor changes to database
+            service.SaveCodeToDb(model); // Save editor changes to database
         }
 
         public void JoinDocument(int documentId)
