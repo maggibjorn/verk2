@@ -249,7 +249,7 @@ namespace WebCode01.Services
         public bool IsInProject(string email, int projectId)
         {
             var userId = (from u in db.Users
-                          where u.Email == email
+                          where u.UserName == email
                           select u.Id).FirstOrDefault();
 
             var test = (from m in db.members

@@ -17,7 +17,6 @@ namespace WebCode01.Tests.Services
     /// <summary>
     /// Unit testing for ProjectService class
     /// </summary>
-   
     [TestClass]
     public class ProjectServiceTest
     {
@@ -202,6 +201,44 @@ namespace WebCode01.Tests.Services
             Assert.IsTrue(result.Count == 1 && result[0].name == "code");
 
         }
+
+        /// <summary>
+        /// Search for project name ""
+        /// </summary>
+        [TestMethod]
+        public void TestProjectSearchLue()
+        {
+            // Arrange:
+            const string userId = "b"; // The id of user John
+            string searchText = "My";
+
+            // Act:
+            var result = service.ProjectSearch(userId, searchText);
+
+            // Assert:
+            Assert.IsTrue(result.Count == 1 && result[0].name == "MyCProject");
+
+        }
+
+        /// <summary>
+        /// SearchProject should return all user projects if search string is empty.
+        /// For John this means that SearchProject returns three projects
+        /// </summary>
+        [TestMethod]
+        public void TestProjectSearchJohn()
+        {
+            // Arrange:
+            const string userId = "a"; // The id of user John
+            string searchText = "";
+
+            // Act:
+            var result = service.ProjectSearch(userId, searchText);
+
+            // Assert:
+            Assert.AreEqual(3, result.Count);
+
+        }
+
 
 
 
