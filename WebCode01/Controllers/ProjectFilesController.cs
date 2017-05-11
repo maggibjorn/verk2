@@ -154,7 +154,7 @@ namespace WebCode01.Controllers
             model.userEmail = email;
 
             bool checkIfMemberExist = service.IsInProject(email, id);
-            if(checkIfMemberExist==true)
+            if(checkIfMemberExist == true)
             {
                 service.AddMember(model, id);
             }
