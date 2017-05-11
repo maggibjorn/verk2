@@ -136,16 +136,15 @@ namespace WebCode01.Controllers
         public ActionResult AddMember(FormCollection coll, int Id)
         {
             string email = coll["email"];
-            int id = Id;
 
             AddMemberViewModel model = new AddMemberViewModel();
-            model.projectId = id;
+            model.projectId = Id;
             model.userEmail = email;
 
-            bool checkIfMemberExist = service.IsInProject(email, id);
+            bool checkIfMemberExist = service.IsInProject(email, Id);
             if(checkIfMemberExist == true)
             {
-                service.AddMember(model, id);
+                service.AddMember(model, Id);
             }
 
             return RedirectToAction("Index", new { projectId = model.projectId });
