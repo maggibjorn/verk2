@@ -6,11 +6,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebCode01.ViewModels
 {
-    public class CreateBlankFileViewModel
+    public class AddFileViewModel
     {
         public int projectId { get; set; }
         [Required]
-        public string fileName { get; set; }
-        public string fileType { get; set; }
+        [Display(Name ="File")]
+        public HttpPostedFileBase file { get; set; }
     }
 }

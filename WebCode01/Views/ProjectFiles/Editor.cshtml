@@ -6,6 +6,11 @@
 <h2>@ViewBag.name</h2>
 
 
+
+<div class="typerAnchor">
+
+</div>
+
 <div class="row">
     <div id="editor" class="col-md-10">
         @ViewBag.Code
@@ -35,7 +40,8 @@
        
         var fileId = @ViewBag.id;
         var fileName = '@ViewBag.name';
-        var userId = '@ViewBag.userId';
+        var userId = '@ViewBag.userName';
+        //var userName = '@ViewBag.userName';
         var mode = getModeByFileExtension(fileName); // Now ace editor view supports all languages that ace editor supports
 
 
@@ -51,22 +57,24 @@
             silent = true;
             editor.getSession().getDocument().applyDelta(changeData, userId);
             document.getElementById("currUser").innerHTML = userId;
-            var posobj = $(".ace_text-input").attr( "style" );
-            var posArr = posobj.split(";");
-            var cursHeight, left, top;
+            console.log("we got:" + JSON.stringify(changeData));
+            
+            console.log(changeData);
+            $(".typerAnchor").css("display", "block");
+            $(".typerAnchor").css("left", changeData.left);
+            var offset =  $(".row").offset().top;
+            var newTop = changeData.top.replace("px", "").replace(" ","");
+            console.log("this is new top" + newTop);
+            console.log("this is offset" + offset);
+            var newHeight = parseInt(offset) + parseInt(newTop);
+            newHeight = newHeight+"px";
+ 
+            $(".typerAnchor").css("top", newHeight);
+            $(".typerAnchor").html(userId);
+                    
+                
 
-            for(var ob of posArr){
-                if(ob.includes("height")){
-                    cursHeight = ob.split(":")[1];
-                }
-                if(ob.includes("left")){
-                    left = ob.split(":")[1];
-                }
-                if(ob.includes("top")){
-                    top = ob.split(":")[1];
-                }
-            }
-            console.log("We got :"+ cursHeight + left + top);
+
             $('[data-toggle="tooltip"]').tooltip('show');
             silent = false;
         };
@@ -81,11 +89,27 @@
                     return;
                 }
                 console.log(obj);
+                $(".typerAnchor").css("display", "none");
                 var content = editor.getSession().getValue();
+                var posobj = $(".ace_text-input").attr( "style" );
+                var posArr = posobj.split(";");
+                var cursHeight, left, top;
+
+                for(var ob of posArr){
+                    if(ob.includes("height")){
+                        obj.cursHeight = ob.split(":")[1];
+                    }
+                    if(ob.includes("left")){
+                        obj.left = ob.split(":")[1];
+                    }
+                    if(ob.includes("top")){
+                        obj.top = ob.split(":")[1];
+                    }
+                }
+
+                console.log(JSON.stringify(obj));
                 codeHub.server.onChange(obj, fileId, content, userId);
-                
-
-
+              
 
             });
 

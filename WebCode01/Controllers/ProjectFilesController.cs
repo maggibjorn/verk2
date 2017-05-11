@@ -43,28 +43,11 @@ namespace WebCode01.Controllers
             ViewBag.id = fileId;
             ViewBag.name = model.name;
             ViewBag.Code = model.fileContent;
-            ViewBag.userId = User.Identity.GetUserId();
+            @ViewBag.userId = User.Identity.GetUserId();
+            string userId = User.Identity.GetUserId(); ;
+            ViewBag.userName = service.GetUserNameById(userId);         
             return View();
         }
-
-        /*[Authorize]
-        public ActionResult AddMember(int projectId)
-        {
-            ViewBag.projectId = projectId;
-            return View();
-        }
-        
-        [HttpPost]
-        public ActionResult AddMember(AddMemberViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-            service.AddMember(model);
-
-            return RedirectToAction("Index", new { projectId = model.projectId });
-        }*/
 
         [Authorize]
         public ActionResult AddFile(int projectId)
@@ -76,9 +59,14 @@ namespace WebCode01.Controllers
         [HttpPost]
         public ActionResult AddFile(AddFileViewModel model)
         {
+            if(!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
             bool nameTaken = service.CheckFileName(model.file.FileName, model.projectId);
 
-            if(model.file == null || nameTaken == true)
+            if(nameTaken == true)
             {
             return RedirectToAction("Index", new { projectId = model.projectId });
             }
@@ -104,7 +92,7 @@ namespace WebCode01.Controllers
             bool test = Int32.TryParse(projectId, out numId);
             if (!test)
             {
-                // Error
+                return View("Error"); // Return error view if parse doesn't work
             }
             CreateBlankFileViewModel model = new CreateBlankFileViewModel
             {
@@ -114,7 +102,7 @@ namespace WebCode01.Controllers
             };
             string name = model.fileName + "." + model.fileType;
             bool nameTaken = service.CheckFileName(name, model.projectId);//check if name is taken
-            if (model.fileName == null || nameTaken == true)
+            if (string.IsNullOrEmpty(model.fileName)|| nameTaken == true)
             {
                 return RedirectToAction("Index", new { projectId = model.projectId });
             }

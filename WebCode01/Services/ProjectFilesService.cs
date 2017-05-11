@@ -47,6 +47,15 @@ namespace WebCode01.Services
 
         }
 
+        public string GetUserNameById(string userId)
+        {
+            var userName = (from u in db.Users
+                            where u.Id == userId
+                            select u.UserName).FirstOrDefault();
+
+            return userName;
+        }
+
         public List<ProjectFileListViewModel> GetFilesByType(int projectId, string type)
         {
             var filesByType = (from f in db.files
@@ -107,7 +116,8 @@ namespace WebCode01.Services
             Member newMember = new Member()
             {
                 projectId = model.projectId,
-                userId = userId
+                userId = userId,
+                isAuthor = false
             };
             db.members.Add(newMember);
             db.SaveChanges();

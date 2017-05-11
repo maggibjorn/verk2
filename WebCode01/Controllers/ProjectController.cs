@@ -17,7 +17,8 @@ namespace WebCode01.Controllers
         public ActionResult Index()
         { 
             string id = User.Identity.GetUserId(); // Get current user id
-            List<ProjectListViewModel> model = service.GetUserProjectList(id);
+            
+            List<ProjectListViewModel> model = service.GetUserProjectList(id); // The list can be empty (no user projects)
             IEnumerable<ProjectListViewModel> modelList = model;
             return View(modelList);
         }
@@ -27,7 +28,7 @@ namespace WebCode01.Controllers
         public ActionResult FilterProjects(bool isAuthor)
         {
             string id = User.Identity.GetUserId(); // Get current user id
-            List<ProjectListViewModel> model = service.FilterProjects(id, isAuthor);
+            List<ProjectListViewModel> model = service.FilterProjects(id, isAuthor); // The list can be empty 
             IEnumerable<ProjectListViewModel> modelList = model;
             return View("Index", modelList);
         }
@@ -71,6 +72,7 @@ namespace WebCode01.Controllers
             IEnumerable<ProjectListViewModel> modelList = myProjects;
             return View("DeleteProject", modelList);
         }
+
         public ActionResult KickMember()
         {
             string userId = User.Identity.GetUserId();

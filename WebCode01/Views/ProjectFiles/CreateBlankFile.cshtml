@@ -10,6 +10,7 @@
     <div>
         @Html.HiddenFor(x => x.projectId, new { @id = "hidden-projectId" })
         @Html.TextBoxFor(x => x.fileName, new { type = "text" })
+        @Html.ValidationMessageFor(x => x.fileName, "", new { @class = "text-danger" })
         <select name="type">
             <option value="c#">C#</option>
             <option value="c++">C++</option>

@@ -22,3 +22,13 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.typerAnchor {
+position: absolute;
+z-index: 999;
+background-color: deeppink;
+display: none;
+font-size: 10px;
+margin: -15px 0px 0px 10px;
+
+}
