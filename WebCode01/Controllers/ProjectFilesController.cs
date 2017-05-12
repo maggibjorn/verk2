@@ -127,11 +127,9 @@ namespace WebCode01.Controllers
             return View(Tuple.Create(projectId, modelList));
         }
 
-        [HttpPost]
         [Authorize]
-        public ActionResult AddMember(FormCollection coll, int Id)
+        public ActionResult AddThisMember(string email, int Id)
         {
-            string email = coll["email"];
 
             AddMemberViewModel model = new AddMemberViewModel();
             model.projectId = Id;
@@ -140,24 +138,21 @@ namespace WebCode01.Controllers
             bool checkIfMemberExist = service.IsInProject(email, Id);
             if(checkIfMemberExist == true)
             {
-                service.AddMember(model, Id);
+                service.AddMember(model);
             }
 
-            return RedirectToAction("Index", new { projectId = model.projectId });
+            return RedirectToAction("ProjectMembers", new { projectId = Id });
         }
 
 
         [Authorize]
-        public ActionResult SearchMember(FormCollection coll)
+        [HttpPost]
+        public ActionResult SearchMember(FormCollection coll, int Id)
         {
             string searchValue = coll["search"];
-            string Id = coll["projectId"];
-            int id;
-            string u = Request.Url.ToString();
-            Int32.TryParse(Id, out id);
-            List<AddMemberViewModel> emails = service.MemberSearch(searchValue, id);
+            List<AddMemberViewModel> emails = service.MemberSearch(searchValue, Id);
             IEnumerable<AddMemberViewModel> modelList = emails;
-            return View("AddMember",Tuple.Create(id, modelList));
+            return View("AddMember",Tuple.Create(Id, modelList));
         }
         [Authorize]
         public ActionResult ComfirmDelete(int projectId)
@@ -187,7 +182,7 @@ namespace WebCode01.Controllers
         public ActionResult ConfirmKick(string email, int projectId)
         {
             service.DeleteMemberFromProject(email, projectId);
-            return RedirectToAction("Index", "Project");
+            return RedirectToAction("ProjectMembers", new { projectId = projectId });
         }
     }
 }

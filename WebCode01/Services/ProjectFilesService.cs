@@ -107,7 +107,7 @@ namespace WebCode01.Services
             db.SaveChanges();
 
         }
-        public void AddMember(AddMemberViewModel model, int? Id)
+        public void AddMember(AddMemberViewModel model)
         {
             var userId = (from u in db.Users
                        where model.userEmail == u.Email
@@ -240,7 +240,7 @@ namespace WebCode01.Services
                               userEmail = u.Email,
                               projectId = projectId
                           }).ToList();
-            
+
             return result;
         }
 
