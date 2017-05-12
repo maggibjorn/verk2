@@ -20,20 +20,19 @@ namespace WebCode01.Controllers
             List<ProjectFileListViewModel> model = service.GetProjectFilesById(projectId);
             if (model.Count > 0)
             {
-                ViewBag.projectId = model[0].projectId; // Fetch project id if file list isn't empty, use this in editor view to save file to database
+                //ViewBag.projectId = model[0].projectId; // Fetch project id if file list isn't empty, use this in editor view to save file to database
             }
             IEnumerable<ProjectFileListViewModel> modelList = model;
-            return View(modelList);
+            return View(Tuple.Create(modelList,projectId));
         }
 
         // Filter the user projects by type of projects, java, c++, etc
         [Authorize]
         public ActionResult FilesByType(int projectId, string fileType)
         {
-            ViewBag.projectId = Request.Url.ToString().Split('=')[1][0];
             List<ProjectFileListViewModel> model = service.GetFilesByType(projectId, fileType);
             IEnumerable<ProjectFileListViewModel> modelList = model;
-            return View("Index", modelList);
+            return View("Index", Tuple.Create(modelList, projectId));
         }
 
         [Authorize]

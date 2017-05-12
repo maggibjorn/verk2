@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebCode01.ViewModels.ProjectFileListViewModel>
+﻿@model Tuple<IEnumerable<WebCode01.ViewModels.ProjectFileListViewModel>,int>
 @{
     ViewBag.Title = "Project Files";
 }
@@ -12,12 +12,12 @@
         <span class="caret"></span>
     </button>
     <ul class="dropdown-menu">
-        <li>@Html.ActionLink("All Files", "Index", new { projectId = @ViewBag.projectId})</li>
-        <li>@Html.ActionLink("C#", "FilesByType", new { projectId = @ViewBag.projectId, fileType = "C#" })</li>
-        <li>@Html.ActionLink("C++", "FilesByType", new { projectId = @ViewBag.projectId, fileType = "C++" })</li>
-        <li>@Html.ActionLink("Javascript", "FilesByType", new { projectId = @ViewBag.projectId, fileType = "Javascript" })</li>
-        <li>@Html.ActionLink("HTML", "FilesByType", new { projectId = @ViewBag.projectId, fileType = "HTML" })</li>
-        <li>@Html.ActionLink("CSS", "FilesByType", new { projectId = @ViewBag.projectId, fileType = "CSS" })</li>
+        <li>@Html.ActionLink("All Files", "Index", new {projectId = Model.Item2})</li>
+        <li>@Html.ActionLink("C#", "FilesByType", new { projectId = Model.Item2, fileType = "C#" })</li>
+        <li>@Html.ActionLink("C++", "FilesByType", new { projectId = Model.Item2, fileType = "C++" })</li>
+        <li>@Html.ActionLink("Javascript", "FilesByType", new { projectId = Model.Item2, fileType = "Javascript" })</li>
+        <li>@Html.ActionLink("HTML", "FilesByType", new { projectId = Model.Item2, fileType = "HTML" })</li>
+        <li>@Html.ActionLink("CSS", "FilesByType", new { projectId = Model.Item2, fileType = "CSS" })</li>
     </ul>
 </div>
 
@@ -31,7 +31,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach(var item in Model)
+                    @foreach(var item in Model.Item1)
                     {
                         <tr>
                             <td>@Html.ActionLink(item.fileName, "Editor", new { fileId = item.id})</td>
