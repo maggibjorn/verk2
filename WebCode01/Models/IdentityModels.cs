@@ -20,6 +20,9 @@ namespace WebCode01.Models
         }
     }
 
+    /// <summary>
+    /// Virtual class to be able to create mock database 
+    /// </summary>
     public interface IAppDataContext
     {
         IDbSet<Member> members { get; set; }
@@ -32,9 +35,10 @@ namespace WebCode01.Models
         
     }
 
-   
-
-
+    /// <summary>
+    /// Takes care of all database access in the system.
+    /// Used in service classes. 
+    /// </summary>
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IAppDataContext
     {
         public IDbSet<Member> members { get; set; }

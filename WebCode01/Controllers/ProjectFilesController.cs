@@ -13,7 +13,9 @@ namespace WebCode01.Controllers
     public class ProjectFilesController : Controller
     {
         public ProjectFilesService service = new ProjectFilesService(null);
-        // GET: ProjectFiles
+        /// <summary>
+        /// Action that returns all files in corresponding project.
+        /// </summary>
         [Authorize]
         public ActionResult Index(int projectId)
         {            
@@ -26,7 +28,9 @@ namespace WebCode01.Controllers
             return View(Tuple.Create(modelList,projectId));
         }
 
-        // Filter the user projects by type of projects, java, c++, etc
+        /// <summary>
+        /// Action that filters the file list by file type, c++ javascript etc.
+        /// </summary>
         [Authorize]
         public ActionResult FilesByType(int projectId, string fileType)
         {
@@ -34,7 +38,11 @@ namespace WebCode01.Controllers
             IEnumerable<ProjectFileListViewModel> modelList = model;
             return View("Index", Tuple.Create(modelList, projectId));
         }
-
+    
+        /// <summary>
+        /// Action that returns the editor. 
+        /// Sends important variables to view to handle javascript code.
+        /// </summary>
         [Authorize]
         public ActionResult Editor(int fileId)
         {
@@ -48,6 +56,10 @@ namespace WebCode01.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Get action for adding file to project. 
+        /// Used when user uploads file from his computer.
+        /// </summary>
         [Authorize]
         public ActionResult AddFile(int projectId)
         {
@@ -55,6 +67,10 @@ namespace WebCode01.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Post action for adding file to project. 
+        /// Used when user uploads file from his computer.
+        /// </summary>
         [HttpPost]
         public ActionResult AddFile(AddFileViewModel model)
         {
@@ -73,7 +89,9 @@ namespace WebCode01.Controllers
             return RedirectToAction("Index", new { projectId = model.projectId });
         }
 
-
+        /// <summary>
+        /// Get action for creating blank file on website of certain type, c++ javascript etc.
+        /// </summary>
         [Authorize]
         public ActionResult CreateBlankFile(int projectId)
         {
@@ -81,6 +99,9 @@ namespace WebCode01.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Post action for creating blank file on website of certain type, c++ javascript etc.
+        /// </summary>
         [HttpPost]
         public ActionResult CreateBlankFile(FormCollection coll)
         {
@@ -110,7 +131,10 @@ namespace WebCode01.Controllers
             return RedirectToAction("Index", new { projectId = numId});
         }
 
-        // List up all project members in project
+        /// <summary>
+        /// Action that returns all project members to view.
+        /// </summary>
+        [Authorize]
         public ActionResult ProjectMembers(int projectId)
         {
             ViewBag.projectId = Request.Url.ToString().Split('=')[1]; // Use this to make "back to project" button
@@ -119,6 +143,10 @@ namespace WebCode01.Controllers
             return View(modelList);
         }
 
+        /// <summary>
+        /// Action that returns list of all project members to view.
+        /// The user can then decide which member to delete from project.
+        /// </summary>
         [Authorize]
         public ActionResult AddMember(int projectId)
         {
@@ -127,6 +155,9 @@ namespace WebCode01.Controllers
             return View(Tuple.Create(projectId, modelList));
         }
 
+        /// <summary>
+        /// Action that adds new member to project.
+        /// </summary>
         [Authorize]
         public ActionResult AddThisMember(string email, int Id)
         {
@@ -144,7 +175,11 @@ namespace WebCode01.Controllers
             return RedirectToAction("ProjectMembers", new { projectId = Id });
         }
 
-
+        /// <summary>
+        /// Action that searches for member in certain project.
+        /// Used to prevent user errors.
+        /// User cannot add unexisting user to project.
+        /// </summary>
         [Authorize]
         [HttpPost]
         public ActionResult SearchMember(FormCollection coll, int Id)
@@ -154,6 +189,11 @@ namespace WebCode01.Controllers
             IEnumerable<AddMemberViewModel> modelList = emails;
             return View("AddMember",Tuple.Create(Id, modelList));
         }
+
+        /// <summary>
+        /// Action for confirming deletion of project.
+        /// Grammar invalid, reveived errors when changing name of action and corresponding view.
+        /// </summary>
         [Authorize]
         public ActionResult ComfirmDelete(int projectId)
         {
@@ -164,6 +204,9 @@ namespace WebCode01.Controllers
             return View("ComfirmDelete", Tuple.Create(members,files,projectId));
         }
 
+        /// <summary>
+        /// Post action that takes care of deleting certain project.
+        /// </summary>
         [Authorize]
         [HttpPost]
         public ActionResult ConfirmDelete(int projectId)
@@ -172,6 +215,10 @@ namespace WebCode01.Controllers
             service.DeleteProject(projectId);
             return RedirectToAction("Index", "Project");
         }
+
+        /// <summary>
+        /// Action that returns view that lists the member being kicked.
+        /// </summary>
         [Authorize]
         public ActionResult KickThisMember(int projectId, string email, string projectName)
         {
@@ -179,6 +226,10 @@ namespace WebCode01.Controllers
             kickThisMember.name = email;
             return View("KickThisMember", Tuple.Create(kickThisMember,projectId,projectName));
         }
+
+        /// <summary>
+        /// Action that takes care of actually kicking the member from project.
+        /// </summary>
         public ActionResult ConfirmKick(string email, int projectId)
         {
             service.DeleteMemberFromProject(email, projectId);

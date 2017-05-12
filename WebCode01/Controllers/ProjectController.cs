@@ -12,7 +12,9 @@ namespace WebCode01.Controllers
     public class ProjectController : Controller
     {
         public ProjectService service = new ProjectService(null);
-        // GET: Project
+        /// <summary>
+        /// Action returns list of all user projects.
+        /// </summary>
         [Authorize]
         public ActionResult Index()
         { 
@@ -23,7 +25,10 @@ namespace WebCode01.Controllers
             return View(modelList);
         }
 
-        // Filter the user project list by member projects and user projects
+        /// <summary>
+        /// isAuthor=true returns user author projects, 
+        /// isAuthor=false returns user member projects.
+        /// </summary>
         [Authorize]
         public ActionResult FilterProjects(bool isAuthor)
         {
@@ -33,6 +38,9 @@ namespace WebCode01.Controllers
             return View("Index", modelList);
         }
 
+        /// <summary>
+        /// Get action for creating new user project.
+        /// </summary>
         [Authorize]
         public ActionResult CreateProject()
         {
@@ -40,6 +48,9 @@ namespace WebCode01.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Post action for creating new user project.
+        /// </summary>
         [HttpPost]
         public ActionResult CreateProject(CreateProjectViewModel model)
         {
@@ -53,6 +64,10 @@ namespace WebCode01.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Action that returns list of searched user projects.
+        /// searchValue variable is the keyword.
+        /// </summary>
         [Authorize]
         public ActionResult ProjectSearch(FormCollection coll)
         {
@@ -64,6 +79,13 @@ namespace WebCode01.Controllers
             return View("Index", modelList);
         }
 
+        /// <summary>
+        /// Action that returns list of all author projects.
+        /// The user can choose to delete his author projects.
+        /// The deletion takes place in ProjectFilesController.
+        /// Because there are already service classes in ProjectFilesController
+        /// that can handle the deletion.
+        /// </summary>
         [Authorize]
         public ActionResult DeleteProject()
         {
@@ -73,6 +95,13 @@ namespace WebCode01.Controllers
             return View("DeleteProject", modelList);
         }
 
+        /// <summary>
+        /// Action that returns list of all author projects.
+        /// The user can choose to kick members from his author projects.
+        /// The kicking takes place in ProjectFilesController.
+        /// Because there are already service classes in ProjectFilesController
+        /// that can handle the kicking.
+        /// </summary>
         public ActionResult KickMember()
         {
             string userId = User.Identity.GetUserId();

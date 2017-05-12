@@ -17,6 +17,9 @@ namespace WebCode01.Services
             db = context ?? new ApplicationDbContext();
         }
         
+        /// <summary>
+        /// Function that returns all projects of certain user.
+        /// </summary>
         public List<ProjectListViewModel> GetUserProjectList(string id)
         {
             
@@ -33,6 +36,9 @@ namespace WebCode01.Services
             return userProjects;
         }
 
+        /// <summary>
+        /// Function that filter user projects by author/member projects.
+        /// </summary>
         public List<ProjectListViewModel> FilterProjects(string id, bool isAuthor)
         {
             var filter = (from p in db.projects
@@ -48,6 +54,10 @@ namespace WebCode01.Services
             return filter;
         }
 
+        /// <summary>
+        /// Function that adds new project to database.
+        /// The project is owned be specific user.
+        /// </summary>
         public void AddProjectToDb(CreateProjectViewModel model, string id)
         {
             Project usersProject = new Project
@@ -77,7 +87,10 @@ namespace WebCode01.Services
             db.SaveChanges();
         }
 
-        // Search project list of user
+        /// <summary>
+        /// Function that searches specific user projects.
+        /// User types in search value and function returns all projects containing the search value.
+        /// </summary>
         public List<ProjectListViewModel> ProjectSearch(string id, string searchValue)
         {
             var userProjects = GetUserProjectList(id); // Get user project list
@@ -88,6 +101,11 @@ namespace WebCode01.Services
 
             return result;
         }
+
+        /// <summary>
+        /// Function that returns all author projects of user
+        /// and all members in each project.
+        /// </summary>
         public List<KickMemberViewModel> GetMyProjectsAndMembers(string userId, bool isAuthor)
         {
             var authorProjects = FilterProjects(userId, true);
