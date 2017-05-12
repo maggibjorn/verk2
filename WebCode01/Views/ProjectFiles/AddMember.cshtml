@@ -14,17 +14,18 @@
 </div>
 <div class="container">
 
-    @foreach (var item in Model.Item2)
-    {
-        <div clss="col-md-4">
-            <form class="add" method="post" action="@Url.Action("AddMember", "ProjectFiles", new { Id = Model.Item1 },null)">
-                <input type="text" name="email" id="email" value="@item.userEmail" readonly />
-                <input type="hidden" name="projectId" class="hidden-projectId2" />
-                <button type="submit" class="btn btn-default" value="AddMember">ADD</button>
-            </form>
-        </div>
-    }
 </div>
+
+@foreach (var item in Model.Item2)
+{
+    <div clss="col-md-4">
+        <form class="add" method="post" action="@Url.Action("AddMember", "ProjectFiles", new { Id = Model.Item1 },null)">
+            <input type="text" name="email" id="email" value="@item.userEmail" readonly />
+            <input type="hidden" name="projectId" class="hidden-projectId2" />
+            <button type="submit" class="btn btn-default" value="AddMember">ADD</button>
+        </form>
+    </div>
+}
 
 
 @section scripts

@@ -3,64 +3,108 @@
 @{
     ViewBag.Title = "Home Page";
 }
+<link href="~/Content/slides.css" rel="stylesheet" />
+<link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
 
-<div class="jumbotron">
-    <h1>WebCode</h1>
-    <p class="lead">WebCode app!</p>
-</div>
-<div class="container">
-<div class="row">
-    <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-6 col-lg-5 col-lg-offset-7">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        @Html.ActionLink("Register as a new user", "Register","Account", new { @class="btn btn-primary"})
-                    </div>
-                </div>
-                   
-                        @* Enable this once you have account confirmation enabled for password reset functionality
-                        <p>
-                            @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                        </p>*@
-            }
-    </section>
+<div id="theCarousel" class="carousel slide" data-ride="carousel">
+
+    <!-- Define how many slides to put in the carousel -->
+    <ol class="carousel-indicators">
+        <li data-target="#theCarousel" data-slide-to="0" class="active"> </li>
+        <li data-target="#theCarousel" data-slide-to="1"> </li>
+        <li data-target="#theCarousel" data-slide-to="2"> </li>
+    </ol>
+
+    <!-- Define the text to place over the image -->
+    <div class="carousel-inner">
+        <div class="item active">
+            <div class="slide1"></div>
+            <div class="carousel-caption">
+                <img src="https://scontent-arn2-1.xx.fbcdn.net/v/t34.0-12/18217638_10154602882808366_1396164129_n.png?oh=469ed3acd86674bb889039e790a30db5&oe=5917C26C" id="webcodelogo" alt="WebCode" />
+                <h1 class="head">WebCode?</h1>
+                <p class="text">blabal</p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="slide2"></div>
+            <div class="carousel-caption">
+                <h1 class="head">Syntax highlighting</h1>
+                <p class="text">there is over 110 programming language</p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="slide3"></div>
+            <div class="carousel-caption">
+                <h1 class="head">Did you know</h1>
+                <p class="text">blabla</p>
+            </div>
+        </div>
     </div>
 
+    <!-- Set the actions to take when the arrows are clicked -->
+    <a class="left carousel-control" href="#theCarousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"> </span>
+    </a>
+    <a class="right carousel-control" href="#theCarousel" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
 </div>
-</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-6 col-lg-5 col-lg-offset-7">
+            <section id="loginForm">
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                    @Html.AntiForgeryToken()
+                    <h4>Use a local account to log in.</h4>
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <div class="checkbox">
+                                    @Html.CheckBoxFor(m => m.RememberMe)
+                                    @Html.LabelFor(m => m.RememberMe)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Log in" class="btn btn-default" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                @Html.ActionLink("Register as a new user", "Register", "Account", new { @class = "btn btn-primary" })
+                            </div>
+                        </div>
+
+                        @* Enable this once you have account confirmation enabled for password reset functionality
+                            <p>
+                                @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                            </p>*@
+                }
+            </section>
+        </div>
+
+    </div>
+    </div>
+</body>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -122,10 +122,6 @@ namespace WebCode01.Controllers
         [Authorize]
         public ActionResult AddMember(int projectId)
         {
-            string u = Request.Url.ToString().Split('=')[1];
-            int theId;
-            Int32.TryParse(u, out theId);
-            ViewBag.projectId = theId;
             List<AddMemberViewModel> members = service.GetMembers(projectId);
             IEnumerable<AddMemberViewModel> modelList = members;
             return View(Tuple.Create(projectId, modelList));
